@@ -1,0 +1,79 @@
+.attendance-container{
+    padding:20px;
+    background:#f4f7fc;
+    min-height:100vh;
+}
+
+.attendance-container h2{
+    margin-bottom:20px;
+}
+
+.filter-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    display:flex;
+    gap:20px;
+    align-items:end;
+    margin-bottom:25px;
+}
+
+.filter-box div{
+    display:flex;
+    flex-direction:column;
+}
+
+.filter-box input,
+.filter-box select{
+    padding:10px;
+    width:180px;
+    margin-top:5px;
+}
+
+.filter-box button{
+    padding:10px 20px;
+    background:#2563eb;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.table-box{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    text-align:left;
+    padding:15px;
+    border-bottom:1px solid #ddd;
+}
+
+.present{
+    background:#d1fae5;
+    color:green;
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+.late{
+    background:#fef3c7;
+    color:#b45309;
+    padding:5px 10px;
+    border-radius:20px;
+}
+
+.leave{
+    background:#dbeafe;
+    color:#2563eb;
+    padding:5px 10px;
+    border-radius:20px;
+}

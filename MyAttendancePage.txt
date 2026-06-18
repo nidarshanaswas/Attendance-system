@@ -1,0 +1,123 @@
+import { React } from "react";
+import "./MyAttendancePage.css"
+import Table from "../components/Table"
+
+function Attendance(){
+    return (
+        <div className="attendance-container">
+        <div className="filter-box">
+            <div>
+<label>Employee</label>
+<input type="text" defaultValue="All employees"/>
+</div>
+
+<div>
+                <label>Status</label>
+                <select>
+                    <option>All</option>
+                    <option>Present</option>
+                    <option>Leave</option>
+                    <option>Late</option>
+                </select>
+            </div>
+
+            <div>
+                <label>From</label>
+                <input type="date" defaultValue="2026-jun-01"/>
+            </div>
+
+            <div>
+                <label>To</label>
+                <input type="date" />
+            </div>
+
+            
+
+            <button>Apply</button>
+        </div>
+
+        <div className="table-box">
+            <h3>All attendance</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee</th>
+                        <th>Date</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>Hours</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+            <tr>
+              <td>Priya Nair		</td>
+              <td>Mon, 15 Jun</td>
+              <td>09:01</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span className="present">Present</span></td>
+            </tr>
+
+            <tr>
+                <td>Arjun Rao</td>
+              <td>Mon, 15 Jun</td>
+              <td>09.42</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span className="late">Late</span></td>
+            </tr>
+
+            <tr>
+                <td>Meera Iyer</td>
+              <td>Mon, 15 Jun</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span className="leave">Leave</span></td>
+            </tr>
+
+            <tr>
+                <td>karthick S</td>
+              <td>Mon, 15 Jun</td>
+              <td>08.55</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span className="present">Present</span></td>
+            </tr>
+
+             <tr>
+                <td>Divya Menon</td>
+              <td>Mon, 15 Jun</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span className="absent">Absent</span></td>
+            </tr>
+
+             <tr>
+                <td>Rohit Das</td>
+              <td>Fri, 12 Jun</td>
+              <td>9.00</td>
+              <td>06.10</td>
+              <td>9h 10m</td>
+              <td><span className="present">Present</span></td>
+            </tr>
+            </tbody>
+            </table>
+
+            <div className="pages">
+                <p>showing 1-6 of 124</p>
+
+                <div className="pages-buttons">
+                    <button>Previous</button>
+                    <button>Next</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    );
+}
+export default Attendance;
