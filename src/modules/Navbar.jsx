@@ -4,14 +4,14 @@ import { useLocation } from "react-router-dom";
 import "./Navbar.css"
 
 function Navbar({open, setOpen}) {
-  const location = useLocation();
+  const location = useLocation()
  const getTitle = () => {
   switch (location.pathname) {
     case "/dashboard":
       return "Dashboard";
     case "/attendance":
       return "My Attendance";
-    case "/attendanceList":
+    case "/attendancelist":
       return "Attendance List";
     case "/manual":
       return "Manual Entry";

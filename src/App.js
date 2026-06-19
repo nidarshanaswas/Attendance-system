@@ -24,7 +24,8 @@ function App() {
 
         {open && (
           <div className="sidebar-overlay"
-          onClick={() => setOpen(false)}></div>
+          onClick={() => setOpen(false)}
+          style={{ zIndex: 900}}></div>
         )}
 
         

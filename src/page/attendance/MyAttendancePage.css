@@ -1,6 +1,7 @@
     body{
         font-family: "Inter",sans-serif;
     }
+  
     .attendance-container{
         padding:20px;
         background:#f4f7fc;
@@ -181,5 +182,108 @@
     .pages-buttons button:hover{
         background: #f8fafc;
     }
+.mobile-cards {
+  display: none;
+}
 
- 
+.month-header {
+  background: #fff;
+  padding: 14px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.attendance-card {
+  background: #fff;
+  padding: 8px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.card-row h4 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.card-row p {
+  font-size: 13px;
+  color: #64748B;
+}
+
+@media (max-width:768px){
+
+  .attendance-container{
+    padding: 10px;
+  }
+
+  .filter-box{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  .filter-box input,
+  .filter-box select{
+    width: 100%;
+    min-width: 0;
+  }
+
+  .filter-box button{
+    grid-column: span 2;
+    width: 60%;
+    justify-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    font-family: "Inter",sans-serif;
+  }
+
+  .table-box{
+    padding: 8px;   
+  }
+
+  table{
+    display: none;
+  }
+
+  .mobile-cards{
+    display: block;
+  }
+
+  .attendance-card{
+    padding: 10px 12px;   
+    margin-bottom: 8px;  
+    border-radius: 10px;
+  }
+
+  .card-row{
+    align-items: flex-start;
+  }
+
+  .card-row h4{
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .card-row p{
+    margin: 2px 0 0 0;
+    font-size: 12px;
+  }
+
+}
