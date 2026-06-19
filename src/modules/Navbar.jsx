@@ -1,7 +1,6 @@
 import { React } from "react";
 import { createRoot } from "react-dom/client";
-import "./Navbar.css"
-
+import "../styles/Navbar.css";
 function Navbar({open, setOpen}) {
   return (
     <div className="navbar">

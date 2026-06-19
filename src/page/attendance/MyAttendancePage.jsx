@@ -1,5 +1,5 @@
 import { React } from "react";
-import "./MyAttendancePage.css"
+import "../../styles/MyAttendancePage.css"
 import Table from "../../components/Table"
 
 function Attendance(){

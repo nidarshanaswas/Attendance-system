@@ -1,22 +1,18 @@
-import { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import Sidebar from './modules/Sidebar';
-import Navbar from './modules/Navbar';
-import Attendance from './page/attendance/MyAttendancePage.jsx'
-
+import { Routes, Route } from "react-router-dom";
+import LoginPage from "./page/auth/LoginPage";
+import Dashboard from "./page/attendance/DashboardPage";
+import Attendance from "./page/attendance/MyAttendancePage";
+import Employee from "./page/employees/EmployeeManagerPage";
+import Report from "./page/reports/ReportsPage";
 function App() {
-  const [open, setOpen] = useState(false);
-
   return (
-    <div className='layout'>
-      <Sidebar open={open} setOpen={setOpen} />
-
-      <div className='main-content'>
-        <Navbar open={open} setOpen={setOpen} />
-        <Attendance />
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/attendacd" element={<Attendance/>}/>
+      <Route path="/employee" element={<Employee/>}/>
+      <Route path="/report" element={<Report/>}/>
+    </Routes>
   );
 }
 
