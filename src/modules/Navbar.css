@@ -66,3 +66,52 @@
     align-items: center;
     gap: 12px;
 }
+@media (max-width:768px){
+
+    .navbar{
+        height:60px;
+        padding:0 16px;
+
+        display:grid;
+        grid-template-columns: 40px 1fr 40px;
+        align-items:center;
+
+        position:relative;
+    }
+
+    /* Left */
+    .toggle-btn{
+        
+        border:none;
+        
+        font-size:24px;
+        padding:0;
+        justify-self:start;
+    }
+
+    /* Center */
+    .navbar-title{
+        justify-self:center;
+    }
+
+    .navbar-title h2{
+        margin:0;
+        font-size:18px;
+        font-weight:700;
+        white-space:nowrap;
+    }
+
+    /* Right */
+    .profile-section{
+        justify-self:end;
+    }
+
+    .profile-info{
+        display:none;
+    }
+
+    .profile-circle{
+        width:34px;
+        height:34px;
+    }
+} 

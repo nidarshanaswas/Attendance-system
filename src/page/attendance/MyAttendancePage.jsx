@@ -1,6 +1,7 @@
 import { React } from "react";
 import "./MyAttendancePage.css"
 import Table from "../../components/Table"
+import Select from "react-select/base";
 
 function Attendance(){
      const attendanceData = [
@@ -53,6 +54,10 @@ function Attendance(){
       status: "Present"
     }
   ];
+
+  
+
+
 
     return (
         <div className="attendance-container">
