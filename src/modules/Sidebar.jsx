@@ -17,7 +17,7 @@ function Sidebar({ open, setOpen }){
         {/* <button className="toggle-btn" onClick={() => setOpen(!open)}>☰</button> */}
         <div className={`side-bar ${open ? "show" : ""}` }
         onClick={(e) => e.stopPropagation()}>
-            <div className="logo">
+            <div className="sidebar-logo">
                 <img src={skyeye} alt="logo" className="logo-img"/>
            <span className={`menu-text ${open ? "show" : ""}`}><h2>Sky Eye</h2></span>            
             </div>

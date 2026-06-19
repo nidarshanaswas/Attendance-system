@@ -78,7 +78,7 @@
 .side-bar a.active {
     background: #2962ff;
 }
-.logo{
+.sidebar-logo{
     display: flex;
     align-items: center;
     gap: 10px;

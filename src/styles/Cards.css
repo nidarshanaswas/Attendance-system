@@ -1,0 +1,36 @@
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  margin: 20px;
+}
+
+.card-title {
+  color: #64748b;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.card h2 {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+}
+/* .card-value {
+  font-size: 42px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+} */
+
+.card-subtitle {
+  color: #64748b;
+  margin-top: 8px;
+}

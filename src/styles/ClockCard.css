@@ -1,0 +1,86 @@
+.clock-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  margin: 20px;
+}
+
+.clock-card-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.status-badge {
+  width: fit-content;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #16a34a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.clock-card-left h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.clock-card-left p {
+  color: #64748b;
+  font-size: 14px;
+}
+
+.clock-card-right{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+}
+
+/* inline layout instead of stacked */
+.worked-hours-inline{
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  line-height: 1.2;
+  margin-top: 50px;
+}
+.worked-hours-inline .hours{
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.worked-hours-inline .label{
+  font-size: 12px;
+  color: #6b7280;
+}
+/* .clock-card-right h1 {
+  font-size: 22px;
+  color: #0f172a;
+  font-weight: 700;
+}
+
+.clock-card-right p {
+  color: #64748b;
+  margin-bottom: 12px;
+} */
+
+.clock-btn {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+    margin-top: 50px;
+  font-weight: 600;
+  font-size: 15px;
+}
