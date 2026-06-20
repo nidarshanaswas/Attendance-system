@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/login.css";
 import leftImage from "../../assets/Saly-3.png";
@@ -8,11 +8,41 @@ import google from "../../assets/google1.png";
 import facebook from "../../assets/facebook1.png";
 import github from "../../assets/github1.png";
 
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../features/auth/authActions";
+
 function LoginPage() {
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        navigate("/dashboard");
+    const dispatch = useDispatch();
+
+    const [userName, setUserName] = useState("");
+    const [passwordHash, setPasswordHash] = useState("");
+
+    const handleLogin = async () => {
+        const payload = {
+            name: userName,
+            password: passwordHash,
+        };
+        console.log(323233);
+
+        const result = await dispatch(loginUser(payload)).then((data) => {
+            console.log(data, '2323');
+            if (data?.payload?.user) {
+                navigate("/dashboard");
+            } else {
+                alert("Invalid Username or Password");
+            }
+        }).catch((err) => {
+            console.log(err, 32323);
+
+        })
+
+
+
+        // console.log(result,'result');
+
+
     };
     return (
         <div className="login-page">
@@ -35,14 +65,18 @@ function LoginPage() {
                         </div>
 
                     </div>
-                    <label>Email Address</label>
+                    <label>User Name</label>
                     <input
-                        type="email"
-                        placeholder="username or email address"
+                        type="userName"
+                        value={userName}
+                        onChange={(e) => setUserName(e.target.value)}
+                        placeholder="UserName"
                     />
                     <label>Password</label>
                     <input
                         type="password"
+                        value={passwordHash}
+                        onChange={(e) => setPasswordHash(e.target.value)}
                         placeholder="Password"
                     />
                     <a href="/" className="forgot">
