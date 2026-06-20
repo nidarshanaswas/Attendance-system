@@ -14,6 +14,7 @@ function ManualEntryPage() {
           <input type="text" placeholder="Select Employee" />
         </div>
 
+        <div className="row-2">
         <div className="form-group">
           <label>Date</label>
           <input type="date"defaultValue="15 jun 2026" />
@@ -28,7 +29,9 @@ function ManualEntryPage() {
             <option>Absent</option>
           </select>
         </div>
+        </div>
 
+        
         <div className="row-group">
           <div className="form-group">
             <label>Clock In</label>
@@ -40,11 +43,13 @@ function ManualEntryPage() {
             <input type="time" defaultValue="18.00 PM" />
           </div>
         </div>
+        
 
         <div className="form-group">
           <label>Reason / Note</label>
           <textarea placeholder="e.g. Forgot to clock out"></textarea>
         </div>
+      
 
        
         <div className="button-group">
