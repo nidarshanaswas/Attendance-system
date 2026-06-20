@@ -1,7 +1,7 @@
-import { React } from "react";
+import  React  from "react";
 import "./MyAttendancePage.css"
 import Table from "../../components/Table"
-import Select from "react-select/base";
+// import Select from "react-select/base";
 
 function Attendance() {
   const attendanceData = [
@@ -90,7 +90,7 @@ function Attendance() {
 
         <div>
           <label>From</label>
-          <input type="date" defaultValue="2026-jun-01" />
+          <input type="date" defaultValue="2026-06-01" />
         </div>
 
         <div>

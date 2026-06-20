@@ -1,10 +1,20 @@
-import { React } from "react";
+import React  from "react";
 import { createRoot } from "react-dom/client";
 import { useLocation } from "react-router-dom";
 import "./Navbar.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logout from "../assets/logout.png";
 
 function Navbar({open, setOpen}) {
   const location = useLocation()
+  const [showMenu, setShowMenu] = useState(false);
+  const navigate= useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/dashboard");
+  }
  const getTitle = () => {
   switch (location.pathname) {
     case "/dashboard":
@@ -33,7 +43,9 @@ function Navbar({open, setOpen}) {
       </div>
       
 
-      <div className="profile-section">
+      <div className="profile-section"
+      onClick={() => setShowMenu(!showMenu)}
+      style={{position: "relative"}}>
 
         <div className="profile-circle">
           N
@@ -43,6 +55,15 @@ function Navbar({open, setOpen}) {
           <h4>Nidarshana</h4>
           <p>Admin</p>
         </div>
+
+        {showMenu && (
+          <div className="dropdown-menu">
+            <div className="logout-btn" onClick={handleLogout}>
+              <img src={logout} alt="Logout" />
+              <span className="text">LOGOUT</span>
+            </div>
+          </div>
+        )}
 
       </div>
 
