@@ -1,64 +1,63 @@
-import React from "react";
+import { React } from "react";
+// import "../styles/table.css"
 
-function Table({ data }) {
+// function Table({ data }){
+//     return(
+       
+//             <table>
+//                 <thead>
+//                     <tr>
+//                         <th>Employee</th>
+//                         <th>Date</th>
+//                         <th>In</th>
+//                         <th>Out</th>
+//                         <th>Hours</th>
+//                         <th>Status</th>
+//                     </tr>
+//                 </thead>
+
+        
+
+//         <tbody>
+//             {data.map((item, index) => (
+//                 <tr key={index}>
+//                     <td>{item.employee}</td>
+//                     <td>{item.date}</td>
+//                     <td>{item.clockIn}</td>
+//                     <td>{item.clockOut}</td>
+//                     <td>{item.hours}</td>
+//                     <td><span className={item.status.toLowerCase()}>{item.status}</span></td>
+//                     </tr>
+//             ))}
+//         </tbody>
+//         </table>
+//     );
+// }
+// export default Table;
+
+function Table({ data, columns }) {
   return (
-    <>
-      <table className="desktop-table">
-        <thead>
-          <tr>
-            <th>Employee</th>
-            <th>Date</th>
-            <th>In</th>
-            <th>Out</th>
-            <th>Hours</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.employee}</td>
-              <td>{item.date}</td>
-              <td>{item.clockIn}</td>
-              <td>{item.clockOut}</td>
-              <td>{item.hours}</td>
-              <td>
-                <span className={item.status.toLowerCase()}>
-                  {item.status}
-                </span>
-              </td>
-            </tr>
+    <table>
+      <thead>
+        <tr>
+          {columns.map((col, index) => (
+            <th key={index}>{col.header}</th>
           ))}
-        </tbody>
-      </table>
+        </tr>
+      </thead>
 
-   
-      <div className="mobile-cards">
-        <div className="month-header">
-          June 2026 ⌄
-        </div>
-
+      <tbody>
         {data.map((item, index) => (
-          <div className="attendance-card" key={index}>
-            <div className="card-row">
-              <div>
-                <h4>{item.date}</h4>
-                <p>
-                  {item.clockIn === "-"
-                    ? "No punch"
-                    : `${item.clockIn} — ${item.clockOut} • ${item.hours}`}
-                </p>
-              </div>
-
-              <span className={item.status.toLowerCase()}>
-                {item.status}
-              </span>
-            </div>
-          </div>
+          <tr key={index}>
+            {columns.map((col, i) => (
+              <td key={i}>
+                {col.render ? col.render(item) : item[col.key]}
+              </td>
+            ))}
+          </tr>
         ))}
-      </div>
-    </>
+      </tbody>
+    </table>
   );
 }
 
