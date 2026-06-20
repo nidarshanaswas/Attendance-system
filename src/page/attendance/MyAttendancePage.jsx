@@ -54,11 +54,6 @@ function Attendance(){
       status: "Present"
     }
   ];
-
-  
-
-
-
     return (
         <div className="attendance-container">
         <div className="filter-box">
