@@ -89,6 +89,7 @@
         margin-bottom: 15px;
     }
     table{
+        width:100%;
         border-collapse:collapse;
         margin: 10px;
         
@@ -221,11 +222,7 @@
   font-size: 13px;
   color: #64748B;
 }
-.table-scroll{
-  width: 100%;
-  overflow-x:auto ;
-  overflow-y: hidden;
-}
+
 @media (max-width:768px){
 
   .attendance-container{
