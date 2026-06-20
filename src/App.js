@@ -24,11 +24,10 @@ function App() {
 //       <div className='main-content'>
 //         <Navbar open={open} setOpen={setOpen} />
 
-        {open && (
-          <div className="sidebar-overlay"
-          onClick={() => setOpen(false)}
-          style={{ zIndex: 900}}></div>
-        )}
+//         {open && (
+//           <div className="sidebar-overlay"
+//           onClick={() => setOpen(false)}></div>
+//         )}
 
         
 //         <Routes>
