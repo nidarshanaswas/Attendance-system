@@ -28,7 +28,18 @@
 }
 
 @media (max-width: 768px) {
-
+  .dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.table-box {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: -5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+} 
   /* CLOCK CARD */
   .clock-card {
     flex-direction: column;
@@ -42,12 +53,22 @@
     width: 100%;
     justify-content: space-between;
     align-items: center;
+    display: block;
   }
 
-  .worked-hours-inline {
-    margin-top: 0 !important;
-    text-align: right;
-  }
+      .worked-hours-inline {
+        margin-top: 0 !important;
+        text-align: right;
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 10px;
+      }
+      .worked-hours-inline .label {
+    font-size: 12px;
+    margin-top: 10px;
+    color: #6b7280;
+    margin-left: 8px;
+}
 
   .clock-btn {
     margin-top: 0 !important;
@@ -55,9 +76,97 @@
     padding: 12px;
     font-size: 14px;
   }
-
-  /* DASHBOARD CARDS */
+  @media (max-width: 768px) {
+  
+  /* 1. FORCE CARDS TO DISPLAY SIDE-BY-SIDE OR GRID */
   .dashboard-cards {
+    /* Changes from 1fr stack to 2 columns, adjust to repeat(3, 1fr) if you want all 3 side-by-side */
+    grid-template-columns: repeat(2, 1fr) !important; 
+    gap: 12px !important;
+    margin: 12px;
+    margin-top: 0px;
+  }
+  .dashboard-cards > .card:nth-child(3), 
+  .dashboard-cards > div:nth-child(3) { 
+    display: none !important;
+  }
+  .card {
+    margin: 0 !important; /* Reset margin so grid works properly */
+    padding: 12px !important;
+  }
+  .card small{
+    display: none;
+  }
+  .leave{
+    font-size: 14px;
+  }
+  .late{
+    font-size: 14px;
+  }
+  .present{
+    font-size: 14px;
+  }
+  /* Hide the extra subtext inside cards to mimic Image 1 */
+  .card p, 
+  .card span:not(.card-title):not(.card-value),
+  .card .subtext, /* Add whatever class your "+2h vs last week" text uses */
+  .dashboard-cards > div > :third-child { 
+    display: none !important; 
+  }
+.card p{
+  color: #64748b;
+}
+  /* 2. TRANSFORM TABLE INTO A CLEAN LIST VIEW */
+  .table-box table {
+    display: block;
+    width: 100%;
+  }
+
+  /* Hide table head headers (Date, In, Out, Hours, Status) */
+  .table-box thead {
+    display: none;
+  }
+
+  .table-box tbody {
+    display: block;
+    width: 100%;
+  }
+
+  /* Make each row a flexbox container pushing date left and status right */
+  .table-box tr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 12px 0; */
+    margin-top: -10px;
+    border-bottom: 1px solid #f3f4f6;
+  }
+  
+  .table-box tr:last-child {
+    border-bottom: none;
+  }
+
+  /* Hide the Check-In, Check-Out, and Total Hours columns completely */
+  .table-box td:nth-child(2), /* In column */
+  .table-box td:nth-child(3), /* Out column */
+  .table-box td:nth-child(4)  /* Hours column */ {
+    display: none !important;
+  }
+
+  /* Style the remaining Date and Status cells */
+  .table-box td:nth-child(1) { /* Date column */
+    display: block;
+    font-size: 14px;
+    color: #1f2937;
+    font-weight: 500;
+  }
+
+  .table-box td:last-child { /* Status column */
+    display: block;
+  }
+}
+  /* DASHBOARD CARDS */
+  /* .dashboard-cards {
     grid-template-columns: 1fr;
     gap: 12px;
   }
@@ -65,10 +174,10 @@
   .card {
     margin: 12px;
     padding: 18px;
-  }
+  } */
 
   /* TABLE BOX */
-  .table-box {
+  /* .table-box {
     margin: 12px;
     padding: 14px;
   }
@@ -76,6 +185,6 @@
   .table-box h3 {
     font-size: 16px;
     margin-left: 0;
-  }
+  } */
 
 }
