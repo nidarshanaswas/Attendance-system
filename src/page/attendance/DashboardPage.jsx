@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import ClockCard from "./ClockCard";
 import Card from "../../components/Card";
 import Table from "../../components/Table";
 import "../../styles/dashboard.css";
 function Dashboard() {
+  const [isClockedIn, setIsClockedIn] = useState(false);
+
+  const handleClockButton = () => {
+    setIsClockedIn(!isClockedIn);
+  };
+
   const attendanceData = [
     {
       date: "Mon, 15 Jun",
@@ -60,10 +66,11 @@ function Dashboard() {
 
       <ClockCard
         status="Present"
-        clockInTime="09:05 AM"
-        date="Today • Monday, 15 June 2026"
-        workedHours="08h 12m"
-        buttonText="Clock Out"
+        clockInTime="09:00 AM"
+        date="20 Jun 2026"
+        workedHours="0h 00m"
+        buttonText={isClockedIn ? "Clock Out" : "Clock In"}
+        onButtonClick={handleClockButton}
       />
       <div className="dashboard-cards">
         <Card
