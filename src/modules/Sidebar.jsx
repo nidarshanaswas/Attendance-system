@@ -10,10 +10,14 @@ import team from "../assets/teamwork.png"
 import report from "../assets/report.png"
 import { NavLink } from "react-router-dom";
 function Sidebar({ open, setOpen }){
+    // const handleNavclick = () => {
+    //         setOpen(false)
+    //     };
+
     
     return (
         <>
-
+        
         {/* <button className="toggle-btn" onClick={() => setOpen(!open)}>☰</button> */}
         <div className={`side-bar ${open ? "show" : ""}` }
         onClick={(e) => e.stopPropagation()}>
@@ -23,7 +27,7 @@ function Sidebar({ open, setOpen }){
             </div>
             <ul>
                 <li>
-  <NavLink to="/dashboard"  data-title="Dashboard">
+  <NavLink to="/dashboard" data-title="Dashboard">
     <img src={dash} className="small-logos" />
     <span className="menu-text">Dashboard</span>
   </NavLink>
@@ -36,19 +40,19 @@ function Sidebar({ open, setOpen }){
   </NavLink>
 </li>
                 <li>
-                    <NavLink to="/attendanceList" data-title="Attendance Lsit">
+                    <NavLink to="/attendancelist" data-title="Attendance Lsit">
     <span><img src={list} alt="list" className="small-logos"/></span>
     <span className={`menu-text ${open ? "show" : ""}`}>Attendance List</span>
     </NavLink>
 </li>
                 <li> 
-                    <NavLink to="/manual" data-title="Manual Entry">
+                    <NavLink to="/manual"  data-title="Manual Entry">
     <span><img src={entry} alt="entry" className="small-logos"/></span>
     <span className={`menu-text ${open ? "show" : ""}`}>Manual Entry</span>
     </NavLink>
 </li>
                <li>
-                <NavLink to="/EmployeeManager"  data-title="Employees">
+                <NavLink to="/EmployeeManager" data-title="Employees">
     <span>
         <img src={team} alt="team" className="small-logos"/>
     </span>
@@ -56,7 +60,7 @@ function Sidebar({ open, setOpen }){
     </NavLink>
 </li>
                 <li>
-                    <NavLink to="/Reports" data-title="Reports">
+                    <NavLink to="/Reports"  data-title="Reports">
     <span><img src={report} alt="report" className="small-logos"/></span>
     <span className={`menu-text ${open ? "show" : ""}`}>Reports</span>
     </NavLink>
