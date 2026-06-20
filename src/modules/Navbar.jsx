@@ -13,7 +13,7 @@ function Navbar({open, setOpen}) {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/dashboard");
+    navigate("/");
   }
  const getTitle = () => {
   switch (location.pathname) {
@@ -44,7 +44,10 @@ function Navbar({open, setOpen}) {
       
 
       <div className="profile-section"
-      onClick={() => setShowMenu(!showMenu)}
+      onClick={(e) =>{
+        e.stopPropagation();
+        setShowMenu(!showMenu)
+      }}
       style={{position: "relative"}}>
 
         <div className="profile-circle">
@@ -58,7 +61,10 @@ function Navbar({open, setOpen}) {
 
         {showMenu && (
           <div className="dropdown-menu">
-            <div className="logout-btn" onClick={handleLogout}>
+            <div className="logout-btn" onClick={(e) => {
+              e.stopPropagation();
+              handleLogout();
+            }}>
               <img src={logout} alt="Logout" />
               <span className="text">LOGOUT</span>
             </div>

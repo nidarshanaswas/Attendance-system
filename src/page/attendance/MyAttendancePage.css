@@ -21,6 +21,7 @@
         gap:20px;
         align-items:end;
         margin-bottom:25px;
+        
     }
 
     .filter-box div{
@@ -88,7 +89,6 @@
         margin-bottom: 15px;
     }
     table{
-        width:100%;
         border-collapse:collapse;
         margin: 10px;
         
@@ -221,7 +221,11 @@
   font-size: 13px;
   color: #64748B;
 }
-
+.table-scroll{
+  width: 100%;
+  overflow-x:auto ;
+  overflow-y: hidden;
+}
 @media (max-width:768px){
 
   .attendance-container{
@@ -230,9 +234,9 @@
 
   .filter-box{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
-    width: 100%;
+    width: 90%;
     padding: 12px;
     box-sizing: border-box;
   }
@@ -241,6 +245,7 @@
   .filter-box select{
     width: 100%;
     min-width: 0;
+    box-sizing: border-box;
   }
 
   .filter-box button{
@@ -258,13 +263,13 @@
     padding: 8px;   
   }
 
-  table{
-    display: none;
+  .attendance-container table{
+    display: table;
   }
 
-  .mobile-cards{
-    display: block;
-  }
+  /* .mobile-cards{
+    display: none;
+  } */
 
   .attendance-card{
     padding: 10px 12px;   

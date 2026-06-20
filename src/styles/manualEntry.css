@@ -85,7 +85,6 @@ input:focus, select:focus, textarea:focus {
 font-family: "Inter",sans-serif;
 }
 
-/* 📱 MOBILE RESPONSIVE */
 @media (max-width: 768px) {
 
   .manual-container {
@@ -104,7 +103,6 @@ font-family: "Inter",sans-serif;
     gap: 12px;
   }
 
-  /* Inputs full width */
   input,
   select,
   textarea {

@@ -50,7 +50,7 @@ body{
 }
 .side-bar {
   position: relative;
-  z-index: 2000;   /* HIGHER than overlay */
+  z-index: 2000;   
 }
 
 .sidebar-overlay {
@@ -58,7 +58,6 @@ body{
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
- 
-  z-index: 1000;   /* LOWER than sidebar */
+  height: 100%; 
+  z-index: 500;   
 }

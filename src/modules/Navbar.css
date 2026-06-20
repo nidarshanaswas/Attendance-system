@@ -6,6 +6,8 @@
     align-items:center;
     padding:0 25px;
     border-bottom:1px solid #e5e7eb;
+    position: relative;
+    z-index: 1000;
 }
 
 .navbar-title h2{
@@ -65,11 +67,11 @@
 }
 .dropdown-menu {
   position: absolute;
-  top: 60px;
+  top: 50px;
   right: 0;
   background: white;              
   border-radius: 12px;
-  padding: 10px;
+  padding: 7px;
   width: 150px;                  
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
@@ -80,7 +82,7 @@
   gap: 6px;
   background: #2962ff;
   color: white;
-  padding: 8px;
+  padding: 5px;
   border-radius: 30px;
   cursor: pointer;
   font-weight: 600;
@@ -89,14 +91,13 @@
 }
 
 .logout-btn img {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   padding: 6px;
 }
 
 .logout-btn .text {
   font-size: 14px;
-  letter-spacing: 1px;
 }
 
 .logout-btn:hover {
@@ -162,3 +163,28 @@
             justify-content: center;
         }
     }
+    @media (max-width: 768px) {
+
+  .dropdown-menu {
+    top: 44px;
+    width: 100px;
+    padding: 6px;
+  }
+
+  .logout-btn {
+    padding: 3px 6px;      /* 🔥 ultra compact */
+    gap: 5px;
+  }
+
+  .logout-btn img {
+    width: 12px;
+    height: 12px;
+  }
+
+  .logout-btn .text {
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
