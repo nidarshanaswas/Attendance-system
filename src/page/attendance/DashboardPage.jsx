@@ -1,14 +1,67 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ClockCard from "./ClockCard";
 import Card from "../../components/Card";
 import Table from "../../components/Table";
 import "../../styles/dashboard.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getFirstClockIn, getLastClockOut, clockInUser, clockOutUser } from "../../features/attendance/attendanceActions";
+
 function Dashboard() {
   const [isClockedIn, setIsClockedIn] = useState(false);
+  const dispatch = useDispatch();
 
-  const handleClockButton = () => {
-    setIsClockedIn(!isClockedIn);
-  };
+  const firstClockIn = useSelector(
+    (state) => state.attendance.firstClockIn
+  );
+
+  const lastClockOut = useSelector(
+    (state) => state.attendance.lastClockOut
+  );
+  console.log(firstClockIn);
+  console.log(lastClockOut);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    console.log("User :", user);
+
+
+    if (user?.id) {
+      dispatch(getFirstClockIn(user.id));
+      dispatch(getLastClockOut(user.id));
+
+      console.log("First Clock In :", firstClockIn);
+console.log("Last Clock Out :", lastClockOut);
+    }
+  }, [dispatch]);
+  // const handleClockButton = async () => {
+  //   const userData = JSON.parse(localStorage.getItem("user"))
+  //   if (!isClockedIn) {
+
+  //     await dispatch(clockInUser({employeeId: userData.id,}));
+
+  //     setIsClockedIn(true);
+  //   } else {
+  //     await dispatch(
+  //       clockOutUser({
+  //        employeeId: userData.id,
+  //       })
+  //     );
+
+  //     setIsClockedIn(false);
+  //   }
+  // };
+  const handleClockButton = async () => {
+  const userData = JSON.parse(localStorage.getItem("user"));
+
+  if (!isClockedIn) {
+    await dispatch(clockInUser({ employeeId: userData.id }));
+    await dispatch(getFirstClockIn(userData.id));
+    setIsClockedIn(true);
+  } else {
+    await dispatch(clockOutUser({ employeeId: userData.id }));
+    await dispatch(getLastClockOut(userData.id));
+    setIsClockedIn(false);
+  }
+};
 
   const attendanceData = [
     {
@@ -66,8 +119,9 @@ function Dashboard() {
 
       <ClockCard
         status="Present"
-        clockInTime="09:00 AM"
-        date="20 Jun 2026"
+        clockInTime={firstClockIn || "-"}
+        clockOutTime={lastClockOut || "-"}
+        date="22 Jun 2026"
         workedHours="0h 00m"
         buttonText={isClockedIn ? "Clock Out" : "Clock In"}
         onButtonClick={handleClockButton}

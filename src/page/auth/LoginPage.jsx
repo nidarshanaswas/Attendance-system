@@ -27,8 +27,10 @@ function LoginPage() {
         console.log(323233);
 
         const result = await dispatch(loginUser(payload)).then((data) => {
-            console.log(data, '2323');
+            console.log(data, data?.payload?.user,'2323');
             if (data?.payload?.user) {
+                localStorage.setItem("user",JSON.stringify(data?.payload?.user))
+                localStorage.setItem("token", data?.payload?.token)
                 navigate("/dashboard");
             } else {
                 alert("Invalid Username or Password");

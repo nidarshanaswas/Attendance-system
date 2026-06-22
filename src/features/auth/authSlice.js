@@ -19,7 +19,7 @@ const authSlice = createSlice({
 
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.user = action.payload;
+        state.user = action.payload.user;
 
         // localStorage.setItem(
         //   "login_user",
