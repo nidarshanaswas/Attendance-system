@@ -1,62 +1,34 @@
-import  React  from "react";
+import  React, { useEffect, useState }  from "react";
 import "./MyAttendancePage.css"
 import Table from "../../components/Table"
 // import Select from "react-select/base";
 
-function Attendance(){
-     const attendanceData = [
-    {
-      employee: "Priya Nair",
-      date: "Mon, 15 Jun",
-      clockIn: "09:01",
-      clockOut: "-",
-      hours: "-",
-      status: "Present"
-    },
-    {
-      employee: "Arjun Rao",
-      date: "Mon, 15 Jun",
-      clockIn: "09:42",
-      clockOut: "-",
-      hours: "-",
-      status: "Late"
-    },
-    {
-      employee: "Meera Iyer",
-      date: "Mon, 15 Jun",
-      clockIn: "-",
-      clockOut: "-",
-      hours: "-",
-      status: "Leave"
-    },
-    {
-      employee: "Karthick S",
-      date: "Mon, 15 Jun",
-      clockIn: "08:55",
-      clockOut: "-",
-      hours: "-",
-      status: "Present"
-    },
-    {
-      employee: "Divya Menon",
-      date: "Mon, 15 Jun",
-      clockIn: "-",
-      clockOut: "-",
-      hours: "-",
-      status: "Absent"
-    },
-    {
-      employee: "Rohit Das",
-      date: "Fri, 12 Jun",
-      clockIn: "09:00",
-      clockOut: "06:10",
-      hours: "9h 10m",
-      status: "Present"
-    }
-  ];
+function Attendance() {
 
-  
-const columns = [
+  const [attendanceData, setAttendanceData] = useState([]);
+
+  const employeeId = 1;
+
+  useEffect(() => {
+    fetch(`https://391nns29-3000.inc1.devtunnels.ms/v1/api/attendance/range/${employeeId}`)
+    .then((res) => res.json())
+    .then((data) => {
+      
+      const formatted = data.attendance.map((item) =>({
+        employee: data.employee.name,
+        date: item.attendanceDate,
+        clockIn: item.clockInTime || "-",
+        clockOut: item.clockOutTime || "-",
+        hours: `${Math.floor(item.totalMinutes / 60 )}h ${item.totalMinutes % 60}m`,
+        status: item.status
+      }));
+      setAttendanceData(formatted)
+    })
+    .catch((err) => console.log(err));
+  }, []);
+
+
+  const columns = [
   { header: "Employee", key: "employee" },
   { header: "Date", key: "date" },
   { header: "In", key: "clockIn" },
@@ -101,7 +73,6 @@ const columns = [
                 <input type="date" />
             </div>
 
-            
 
             <button>Apply</button>
         </div>
