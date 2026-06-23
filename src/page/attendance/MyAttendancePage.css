@@ -1,3 +1,11 @@
+    *{
+      margin: 0;
+      padding: 0;box-sizing: border-box;
+    }
+    html, body{
+      height: 100%;
+      overflow: hidden;
+    }
     body{
         font-family: "Inter",sans-serif;
     }
@@ -5,8 +13,8 @@
     .attendance-container{
         padding:20px;
         background:#f4f7fc;
-        min-height:100vh;
-    
+        display: flex;
+        flex-direction: column;
     }
 
     .attendance-container h2{
@@ -76,12 +84,14 @@
         margin-bottom: 15px;
     }
 
-    .table-box{
+   .attendance-container .table-box{
         background:white;
         padding:20px;
         border-radius:10px;
+        
+        
     }
-    .table-box h3{
+    .attendance-container .table-box h3{
         font-size: 15px;
         font-weight: 600;
         margin-bottom: 6px;
@@ -92,7 +102,9 @@
         width:100%;
         border-collapse:collapse;
         margin: 10px;
-        
+         /* overflow: hidden;
+        max-height: 400px;  */
+       
     }
 
     th{
