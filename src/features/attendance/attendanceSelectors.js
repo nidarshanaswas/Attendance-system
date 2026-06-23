@@ -1,3 +1,3 @@
-export const selectCurrentUser = state => state.auth.user
-export const selectAuthStatus = state => state.auth.status
-export const selectAuthError = state => state.auth.error
+export const selectCurrentUser = state => state.attendance.user
+export const selectAuthStatus = state => state.attendance.status
+export const selectAuthError = state => state.attendance.error

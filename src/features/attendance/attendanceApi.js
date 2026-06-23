@@ -13,7 +13,7 @@ export async function clockInApi(payload) {
       body: JSON.stringify(payload),
     }
   );
-console.log(apiPath.API_URL);
+// console.log(apiPath.API_URL);
   const data = await response.json();
 
   if (!response.ok) {

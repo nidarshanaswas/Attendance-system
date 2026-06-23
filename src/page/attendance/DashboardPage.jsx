@@ -8,6 +8,8 @@ import { getFirstClockIn, getLastClockOut, clockInUser, clockOutUser } from "../
 
 function Dashboard() {
   const [isClockedIn, setIsClockedIn] = useState(false);
+  const [firstClockedIn, setFirstClockedIn] = useState(null);
+  const [lastClockedOut, setLastClockedOut] = useState(null)
   const dispatch = useDispatch();
 
   const firstClockIn = useSelector(
@@ -17,19 +19,28 @@ function Dashboard() {
   const lastClockOut = useSelector(
     (state) => state.attendance.lastClockOut
   );
-  console.log(firstClockIn);
-  console.log(lastClockOut);
+  // console.log(firstClockIn);
+  // console.log(lastClockOut);
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     console.log("User :", user);
 
 
     if (user?.id) {
-      dispatch(getFirstClockIn(user.id));
-      dispatch(getLastClockOut(user.id));
+      dispatch(getFirstClockIn(user.id)).then((data) => {
+        console.log("data", data)
+        setFirstClockedIn(data?.payload?.firstClockIn?.firstClockInTime)
+      })
+      dispatch(getLastClockOut(user.id)).then((data) => {
+        console.log("Last Clock Out Full Data:", data);
+        console.log("Payload:", data?.payload);
 
-      console.log("First Clock In :", firstClockIn);
-console.log("Last Clock Out :", lastClockOut);
+        setLastClockedOut(data?.payload?.clockOutTime)
+      })
+
+
+      // console.log("First Clock In :", firstClockIn);
+      // console.log("Last Clock Out :", lastClockOut);
     }
   }, [dispatch]);
   // const handleClockButton = async () => {
@@ -50,18 +61,18 @@ console.log("Last Clock Out :", lastClockOut);
   //   }
   // };
   const handleClockButton = async () => {
-  const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = JSON.parse(localStorage.getItem("user"));
 
-  if (!isClockedIn) {
-    await dispatch(clockInUser({ employeeId: userData.id }));
-    await dispatch(getFirstClockIn(userData.id));
-    setIsClockedIn(true);
-  } else {
-    await dispatch(clockOutUser({ employeeId: userData.id }));
-    await dispatch(getLastClockOut(userData.id));
-    setIsClockedIn(false);
-  }
-};
+    if (!isClockedIn) {
+      await dispatch(clockInUser({ employeeId: userData.id }));
+      // await dispatch(getFirstClockIn(userData.id))
+      setIsClockedIn(true);
+    } else {
+      await dispatch(clockOutUser({ employeeId: userData.id }));
+      // await dispatch(getLastClockOut(userData.id));
+      setIsClockedIn(false);
+    }
+  };
 
   const attendanceData = [
     {
@@ -119,8 +130,8 @@ console.log("Last Clock Out :", lastClockOut);
 
       <ClockCard
         status="Present"
-        clockInTime={firstClockIn || "-"}
-        clockOutTime={lastClockOut || "-"}
+        clockInTime={firstClockedIn || "-"}
+        clockOutTime={lastClockedOut || "-"}
         date="22 Jun 2026"
         workedHours="0h 00m"
         buttonText={isClockedIn ? "Clock Out" : "Clock In"}

@@ -24,7 +24,7 @@ function LoginPage() {
             name: userName,
             password: passwordHash,
         };
-        console.log(323233);
+        // console.log(323233);
 
         const result = await dispatch(loginUser(payload)).then((data) => {
             console.log(data, data?.payload?.user,'2323');

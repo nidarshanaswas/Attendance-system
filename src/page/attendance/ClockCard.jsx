@@ -4,6 +4,7 @@ import "../../styles/ClockCard.css";
 function ClockCard({
   status,
   clockInTime,
+  clockOutTime,
   date,
   workedHours,
   buttonText,
@@ -33,7 +34,11 @@ function ClockCard({
             ? `Clocked in ${clockInTime}`
             : `Clocked in at ${clockInTime}`}
         </h2>
-
+        {/* <h2>
+          {isMobile
+            ? `Clocked out ${clockOutTime}`
+            : `Clocked out at ${clockOutTime}`}
+        </h2> */}
         <p>{date}</p>
       </div>
 
