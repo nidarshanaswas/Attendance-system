@@ -1,11 +1,6 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import {
-  clockInApi,
-  clockOutApi,
-  getFirstClockInApi,
-  getLastClockOutApi,
-} from "./attendanceApi";
+import { clockInApi, clockOutApi, getFirstClockInApi, getLastClockOutApi,} from "./attendanceApi";
 
 // Clock In
 export const clockInUser = createAsyncThunk(

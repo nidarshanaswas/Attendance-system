@@ -1,7 +1,7 @@
 import { apiPath } from "../../apiPath";
 
 export async function loginApi(payload) {
-    console.log(payload, 'payload');
+    // console.log(payload, 'payload');
     
   const response = await fetch(
    `${apiPath.API_URL}/${apiPath.login}`, 
