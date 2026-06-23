@@ -1,6 +1,11 @@
 
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { clockInApi, clockOutApi, getFirstClockInApi, getLastClockOutApi,} from "./attendanceApi";
+import { clockInApi,
+   clockOutApi,
+    getFirstClockInApi,
+    getLastClockOutApi,
+    getTotalWorkedTimeApi,
+    } from "./attendanceApi";
 
 // Clock In
 export const clockInUser = createAsyncThunk(
@@ -49,3 +54,15 @@ export const getLastClockOut = createAsyncThunk(
     }
   }
 );
+
+export const getTotalWorkedTime = createAsyncThunk(
+  "attendance/getTotalWorkedTime",
+  async (employeeId,{rejectWithValue}) => {
+    try{
+      return await getTotalWorkedTimeApi(employeeId);
+    }catch (err){
+      return rejectWithValue(err.message);
+    }
+  }
+);
+

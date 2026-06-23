@@ -1,10 +1,10 @@
 import { apiPath } from "../../apiPath";
 
 export async function clockInApi(payload) {
-    
+
   const response = await fetch(
     `${apiPath.API_URL}/${apiPath.clockIn}`,
-    
+
     {
       method: "POST",
       headers: {
@@ -13,7 +13,7 @@ export async function clockInApi(payload) {
       body: JSON.stringify(payload),
     }
   );
-// console.log(apiPath.API_URL);
+  // console.log(apiPath.API_URL);
   const data = await response.json();
 
   if (!response.ok) {
@@ -69,6 +69,19 @@ export async function getLastClockOutApi(employeeId) {
     }
   );
 
+  const data = await response.json();
+  return data;
+}
+
+export async function getTotalWorkedTimeApi(employeeId) {
+  const response = await fetch(
+    `${apiPath.API_URL}/${apiPath.getTotalWorkedTime}/${employeeId}`,{
+    method: "GET",
+    headers: {
+      "content-type": "application/json",
+    },
+  }
+  );
   const data = await response.json();
   return data;
 }

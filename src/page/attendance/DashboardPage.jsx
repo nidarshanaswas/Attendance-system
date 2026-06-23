@@ -4,9 +4,20 @@ import Card from "../../components/Card";
 import Table from "../../components/Table";
 import "../../styles/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getFirstClockIn, getLastClockOut, clockInUser, clockOutUser } from "../../features/attendance/attendanceActions";
+import {
+  getFirstClockIn,
+  getLastClockOut,
+  getTotalWorkedTime,
+  clockInUser,
+  clockOutUser,
+} from "../../features/attendance/attendanceActions";
+import { data } from "react-router-dom";
 
 function Dashboard() {
+  const [workedTime, setWorkedTime] = useState("0h 00m");
+  const [totalWorkedTime, setTotalWorkedTime] = useState(0);
+  const [recentClockInTime, setRecentClockInTime] = useState(null);
+  const [lastClockInDate, setLastClockInDate] = useState(null);
   const [isClockedIn, setIsClockedIn] = useState(false);
   const [firstClockedIn, setFirstClockedIn] = useState(null);
   const [lastClockedOut, setLastClockedOut] = useState(null)
@@ -29,37 +40,96 @@ function Dashboard() {
     if (user?.id) {
       dispatch(getFirstClockIn(user.id)).then((data) => {
         console.log("data", data)
-        setFirstClockedIn(data?.payload?.firstClockIn?.firstClockInTime)
-      })
+        setFirstClockedIn(data?.payload?.firstClockIn?.firstClockInTime);
+        setLastClockInDate(data?.payload?.firstClockIn?.clockInDate);
+      });
+      if (data?.payload?.firstClockIn?.firstClockInTime) {
+        setIsClockedIn(true);
+      }
       dispatch(getLastClockOut(user.id)).then((data) => {
         console.log("Last Clock Out Full Data:", data);
         console.log("Payload:", data?.payload);
 
         setLastClockedOut(data?.payload?.clockOutTime)
       })
+      dispatch(getTotalWorkedTime(user.id)).then((data) => {
+        console.log("totaldata", data);
 
+        setTotalWorkedTime(
+          data?.payload?.totalMinutes || 0
+        );
+
+        setRecentClockInTime(
+          data?.payload?.recentClockInTime
+        );
+      });
 
       // console.log("First Clock In :", firstClockIn);
       // console.log("Last Clock Out :", lastClockOut);
     }
   }, [dispatch]);
-  // const handleClockButton = async () => {
-  //   const userData = JSON.parse(localStorage.getItem("user"))
-  //   if (!isClockedIn) {
 
-  //     await dispatch(clockInUser({employeeId: userData.id,}));
+  useEffect(() => {
+    if (!recentClockInTime) return;
 
-  //     setIsClockedIn(true);
-  //   } else {
-  //     await dispatch(
-  //       clockOutUser({
-  //        employeeId: userData.id,
-  //       })
-  //     );
+    const interval = setInterval(() => {
+      const now = new Date();
 
-  //     setIsClockedIn(false);
-  //   }
+      let [time, modifier] =
+        recentClockInTime.split(" ");
+
+      let [h, m, s] =
+        time.split(":").map(Number);
+
+      if (modifier === "PM" && h !== 12) {
+        h += 12;
+      }
+
+      if (modifier === "AM" && h === 12) {
+        h = 0;
+      }
+
+      const clockInDateTime = new Date();
+
+      clockInDateTime.setHours(
+        h,
+        m,
+        s,
+        0
+      );
+
+      const runningMinutes = Math.floor(
+        (now - clockInDateTime) /
+        (1000 * 60)
+      );
+
+      const finalMinutes =
+        totalWorkedTime +
+        runningMinutes;
+
+      setWorkedTime(
+        formatTime(finalMinutes)
+      );
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [
+    recentClockInTime,
+    totalWorkedTime,
+  ]);
+  // const convertToSeconds = (time) => {
+  //   if(!time) return 0;
+  //   const [h,m,s] = time.split(":").map(Number);
+  //   return h * 3600 + m * 60 + s;
   // };
+
+  const formatTime = (minutes) => {
+    const hrs = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hrs}h ${mins
+      .toString()
+      .padStart(2, "0")}m`;
+  };
   const handleClockButton = async () => {
     const userData = JSON.parse(localStorage.getItem("user"));
 
@@ -132,8 +202,8 @@ function Dashboard() {
         status="Present"
         clockInTime={firstClockedIn || "-"}
         clockOutTime={lastClockedOut || "-"}
-        date="22 Jun 2026"
-        workedHours="0h 00m"
+        date={lastClockInDate || "-"}
+        workedHours={workedTime}
         buttonText={isClockedIn ? "Clock Out" : "Clock In"}
         onButtonClick={handleClockButton}
       />

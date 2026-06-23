@@ -1,8 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { clockInUser, clockOutUser, getFirstClockIn, getLastClockOut, } from "./attendanceActions";
+import { clockInUser,
+    clockOutUser,
+    getFirstClockIn,
+    getLastClockOut,
+    getTotalWorkedTime,
+    } from "./attendanceActions";
 const initialState = {
     firstClockIn: null,
-    lastClockOut: null,
+    lastClockOut: null, 
+    totalWorkedTime: null,
     status: "idle",
     error: null,
 };
@@ -40,7 +46,11 @@ const attendanceSlice = createSlice({
             .addCase(clockOutUser.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.payload;
-            });
+            })
+           .addCase(getTotalWorkedTime.fulfilled, (state,action) => {
+                state.status = "succeeded";
+                state.totalWorkedTime = action.payload;
+            })
     },
 });
 
