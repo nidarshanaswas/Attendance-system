@@ -10,6 +10,7 @@ export const apiPath = {
   clockOut: "attendance/clock-out",
   getLastClockOut: "attendance/last-clockout",
   getTotalWorkedTime: "attendance/working-hours",
+  clockin: "attendance/clock-in",
   attendanceRange: "attendance/range",
 //   refresh: "badge/refresh",
 //   authLogin: "/auth/login",
