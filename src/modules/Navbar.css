@@ -65,7 +65,7 @@
     align-items: center;
     gap: 12px;
 }
-.dropdown-menu {
+/* .dropdown-menu {
   position: absolute;
   top: 50px;
   right: 0;
@@ -102,6 +102,96 @@
 
 .logout-btn:hover {
   transform: scale(1.05);
+} */
+
+.avatar-trigger {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.avatar-circle {
+  width: 55px;
+  height: 55px;
+  /* padding: 5px; */
+  /* background-color: #7a9dfc; */
+  margin-top: 5px;
+  color: #333;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 16px;
+}
+.avatar-circle:hover{
+    box-shadow: 0 0 0 5px #00000026;
+}
+.avatar-circle img{
+    width: 55px;
+    height: 55px;
+    margin-top: 5px;
+    /* border-radius: 50%; */
+
+}
+/* Dropdown Menu Card */
+.dropdown-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #fff;      
+  border-radius: 16px; /* Smooth rounded corners like image 1 */
+  padding: 16px 0 8px 0; /* Interior card breathing space */
+  width: 240px; /* Slightly wider to easily accommodate emails */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+  z-index: 100;
+}
+
+/* User Profile Info Header */
+.user-info-header {
+  padding: 0 20px 12px 20px;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #757575;
+}
+
+/* Clean Log Out Row (Image 1 Style) */
+.logout-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 4px;
+}
+/* 
+.logout-row:hover {
+  background-color: #f9f9f9;
+  border-radius: 30px;
+  padding: 5px;
+  margin: 5px;
+} */
+
+.logout-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.logout-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #ff3b30; /* Perfect red tone for the text */
 }
     @media (max-width:768px){
 
@@ -163,7 +253,7 @@
             justify-content: center;
         }
     }
-    @media (max-width: 768px) {
+    /* @media (max-width: 768px) {
 
   .dropdown-menu {
     top: 44px;
@@ -172,7 +262,7 @@
   }
 
   .logout-btn {
-    padding: 3px 6px;      /* 🔥 ultra compact */
+    padding: 3px 6px;      
     gap: 5px;
   }
 
@@ -186,5 +276,39 @@
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+} */
+
+@media (max-width: 768px) {
+  .dropdown-menu {
+    top: 45px;
+    width: 200px;
+    padding: 12px 0 6px 0;
+  }
+
+  .user-info-header {
+    padding: 0 14px 8px 14px;
+  }
+
+  .user-name {
+    font-size: 14px;
+  }
+
+  .user-email {
+    font-size: 11px;
+  }
+
+  .logout-row {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .logout-icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .logout-text {
+    font-size: 13px;
   }
 }

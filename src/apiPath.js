@@ -9,12 +9,8 @@ export const apiPath = {
   getFirstClockIn: "attendance/first-clockin",
   clockOut: "attendance/clock-out",
   getLastClockOut: "attendance/last-clockout",
-<<<<<<< HEAD
   getTotalWorkedTime: "attendance/working-hours",
-=======
-  clockin: "attendance/clock-in",
   attendanceRange: "attendance/range",
->>>>>>> a8d7c71b193b66976821445b4f6e7fdf8f9fac38
 //   refresh: "badge/refresh",
 //   authLogin: "/auth/login",
 //   fyCode: "auth/fycode-list",
