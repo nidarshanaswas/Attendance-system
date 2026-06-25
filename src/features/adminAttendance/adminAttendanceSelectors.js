@@ -1,4 +1,5 @@
 export const selectAttendance = (state) => state.myAttendance.data;
+export const selectAttendanceList = (state) => state.myAttendance.listData;
 export const selectLoading = (state) => state.myAttendance.loading;
 export const selectError = (state) => state.myAttendance.error;
 

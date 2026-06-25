@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
  import { useDispatch, useSelector } from "react-redux";
  import { fetchAdminAttendance } from "../../features/adminAttendance/adminAttendanceActions";
  import { selectAttendance, selectTotalPages, selectCurrentPage } from "../../features/adminAttendance/adminAttendanceSelectors";
-
+// import Card from "../../components/Card";
 import Table from "../../components/Table";
 import { apiPath } from "../../apiPath"; 
 
@@ -45,6 +45,25 @@ function AdminAttendance() {
   }));
   }, [userId, fromDate, toDate, status, page, dispatch]);
 
+  // const totalDays = attendanceRaw.length;
+
+  // const presentDays = attendanceRaw.filter(
+  //   (item) => item.status === "PRESENT"
+  // ).length
+
+  // const leaveDays = attendanceRaw.filter(
+  //   (item) => item.status === "LEAVE"
+  // )
+
+  // const lateDays = attendanceRaw.filter(
+  //   (item) => item.status === "LATE"
+  // )
+
+  // const totalMinutes = attendanceRaw.filter(
+  //   (sum, item) => sum + (item.totalMinutes || 0),
+  // );
+
+  // const totalHours  = `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
   const attendanceData = (attendanceRaw || []).map((item) => ({
     
   // employee: userId,
@@ -82,10 +101,10 @@ function AdminAttendance() {
 <div>
                 <label>Status</label>
                 <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                    <option>All</option>
-                    <option>Present</option>
-                    <option>Leave</option>
-                    <option>Late</option>
+                    <option value="ALL">All</option>
+                    <option value="PRESENT">Present</option>
+                    <option value="LEAVE">Leave</option>
+                    <option value="LATE">Late</option>
                 </select>
             </div>
 
@@ -115,7 +134,7 @@ function AdminAttendance() {
         </div>
 
         <div className="table-box">
-            <h3>All attendance</h3>
+            <h3>My attendance</h3>
 
             <div className="table-scroll">
             <Table data={attendanceData} columns={columns}/>

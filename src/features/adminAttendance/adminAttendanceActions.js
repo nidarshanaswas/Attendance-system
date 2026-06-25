@@ -1,50 +1,72 @@
-// import { fetchAdminAttendanceApi } from "./adminAttendanceApi";
-// // import { loading, success, error } from "./adminAttendanceSlice";
-// import { createAsyncThunk } from "@reduxjs/toolkit";
-// // export const fetchAdminAttendance = (employeeId) => async (dispatch) => {
+  // import { fetchAdminAttendanceApi } from "./adminAttendanceApi";
+  // // import { loading, success, error } from "./adminAttendanceSlice";
+  // import { createAsyncThunk } from "@reduxjs/toolkit";
+  // // export const fetchAdminAttendance = (employeeId) => async (dispatch) => {
 
 
-// //   try {
-// //     dispatch(loading());
+  // //   try {
+  // //     dispatch(loading());
 
-// //     const data = await fetchAdminAttendanceApi(employeeId);
+  // //     const data = await fetchAdminAttendanceApi(employeeId);
 
-// //     console.log("API RESPONSE", data);
+  // //     console.log("API RESPONSE", data);
 
-// //     const attendance =
-// //       data?.myAttendance ||
-// //       data?.data?.myAttendance ||
-// //       data?.result ||
-// //       data ||
-// //       [];
+  // //     const attendance =
+  // //       data?.myAttendance ||
+  // //       data?.data?.myAttendance ||
+  // //       data?.result ||
+  // //       data ||
+  // //       [];
 
-// //     dispatch(success(Array.isArray(attendance) ? attendance : []));
-// //   } catch (err) {
-// //     dispatch(error(err.message));
-// //   }
-// // };
+  // //     dispatch(success(Array.isArray(attendance) ? attendance : []));
+  // //   } catch (err) {
+  // //     dispatch(error(err.message));
+  // //   }
+  // // };
 
 
-import { fetchAdminAttendanceApi } from "./adminAttendanceApi";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+  import { fetchAdminAttendanceApi } from "./adminAttendanceApi";
+  import { fetchAttendanceListApi } from "./adminAttendanceApi";
+  import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchAdminAttendance = createAsyncThunk(
-  "adminAttendance/fetch",
-  async (params, { rejectWithValue }) => {
-    try {
-      const res = await fetchAdminAttendanceApi(params);
+  export const fetchAdminAttendance = createAsyncThunk(
+    "adminAttendance/fetch",
+    async (params, { rejectWithValue }) => {
+      try {
+        const res = await fetchAdminAttendanceApi(params);
 
-      console.log("API RESPONSE ", res);
+        console.log("API RESPONSE ", res);
 
-      return {
-        data: res.attendance || [],
-        currentPage: res?.page ?? params.page ?? 1,
-        totalPages: res.totalPages ?? 1, 
-        totalRecords: res.totalRecords
-      };
+        return {
+          data: res.attendance || [],
+          currentPage: res?.page ?? params.page ?? 1,
+          totalPages: res.totalPages ?? 1, 
+          totalRecords: res.totalRecords
+        };
 
-    } catch (err) {
-      return rejectWithValue(err.message);
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
     }
-  }
-);
+  );
+
+  export const fetchAttendanceList = createAsyncThunk(
+    "attendanceList/fetch",
+    async (params, { rejectWithValue }) => {
+      try {
+        const res = await fetchAttendanceListApi(params);
+
+        console.log("LIST RESPONSE", res);
+
+        return {
+          data: res.data || res.attendance || res.employee ||[],
+          currentPage: res.page || res.currentPage || params.page || 0,
+          totalPages: res.totalPages || res.pagination?.totalPages|| 1,
+          totalRecords: res.totalRecords || res.pagination?.totalRecords || 0
+        };
+
+      } catch (err) {
+        return rejectWithValue(err.message);
+      }
+    }
+  );
