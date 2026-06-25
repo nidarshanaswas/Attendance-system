@@ -6,12 +6,15 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import logout from "../assets/logout.png";
 import ava1 from "../assets/ava1.png";
+import { showLoader,hideLoader } from "../features/loader/loaderSlice";
+import { useDispatch } from "react-redux";
 
 function Navbar({ open, setOpen }) {
   const location = useLocation()
   const [showMenu, setShowMenu] = useState(false);
   const [user, setUser] = useState({ name: "", email: "" });
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -30,9 +33,16 @@ function Navbar({ open, setOpen }) {
 
   }, [])
   const handleLogout = () => {
+    dispatch(showLoader());
+
     localStorage.removeItem("token");
+
     navigate("/");
-  }
+
+    setTimeout(() => {
+      dispatch(hideLoader());
+    }, 300);
+  };
   const getTitle = () => {
     switch (location.pathname) {
       case "/dashboard":
