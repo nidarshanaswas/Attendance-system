@@ -180,8 +180,7 @@ function Dashboard() {
     // const secs = totalSeconds % 60;
     // console.log(totalSeconds, hrs, mins, secs, "Time----------");
 
-    return `${hrs}h ${mins.toString().padStart(2, "0")}m ${secs
-      .toString()
+    return `${hrs}h ${mins.toString()
       .padStart(2, "0")}m`;
   };
   // const handleClockButton = async () => {
