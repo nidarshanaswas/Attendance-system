@@ -34,7 +34,7 @@ body {
 
 .left-panel {
     background: #2563eb;
-    width: 70%;
+    width: 50%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -62,34 +62,36 @@ body {
 .left-image {
     width: 270px;
     margin-top: -70px;
+    margin-right: 100px;
     position: absolute;
     object-fit: contain;
 }
 
 .right-panel {
     display: flex;
-    width: 62%;
+    width: 50%;
     justify-content: center;
     align-items: center;
 }
 
 .right-image {
     width: 370px;
-    margin-left: 300px;
+    margin-left: 200px;
     object-fit: contain;
 }
 
 .login-card {
     position: absolute;
-    left: 54%;
+    left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 470px;
     height: 530px;
     background: #fff;
     padding: 40px;
+    /* border: 2px solid rgb(0, 0, 0); */
     border-radius: 30px;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, .12);
+    box-shadow: 0 20px 50px rgb(180, 186, 252);
     z-index: 10;
 }
 
@@ -139,7 +141,30 @@ body {
 .login-card input:focus {
     border-color: #2563eb;
 }
+.password-container {
+    position: relative;
+    width: 100%;
+}
 
+.password-container input {
+    width: 100%;
+    padding-right: 45px;
+    box-sizing: border-box;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #666;
+    font-size: 18px;
+}
+
+.eye-icon:hover {
+    color: #000;
+}
 .forgot {
     display: block;
     text-align: right;
@@ -172,19 +197,22 @@ body {
     margin: 20px 0;
     color: #888;
 }
+
 .sing-up {
-     /* color: #00040c; */
+    /* color: #00040c; */
     font-weight: 600;
-    text-align: center  ;
+    text-align: center;
     padding-top: 10px;
 
 }
-.sing-up a{
+
+.sing-up a {
     color: #2563eb;
     text-decoration: none;
     font-weight: 600;
-padding-top: 15px;
+    padding-top: 15px;
 }
+
 .social-buttons {
     display: flex;
     gap: 10px;
@@ -199,11 +227,13 @@ padding-top: 15px;
     border-radius: 12px;
     cursor: pointer;
 }
-.social-img{
+
+.social-img {
     width: 22px;
     height: 22px;
-     align-items: center;
+    align-items: center;
 }
+
 /* .social-img1{
     width: 35x;
     height: 35px;
@@ -220,6 +250,7 @@ padding-top: 15px;
 .mobile-avatar {
     display: none;
 }
+
 /* 
 @media (max-width:1100px){
 
@@ -349,9 +380,11 @@ padding-top: 15px;
     .right-panel {
         display: none;
     }
+
     .logo {
-    display: none;
-}
+        display: none;
+    }
+
     .login-card {
         position: relative;
         top: -50px;
@@ -364,25 +397,26 @@ padding-top: 15px;
 
         margin: 0 auto;
     }
+
     .mobile-avatar {
         display: flex;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: -40px auto 5px;
-    box-shadow: 0 4px 12px rgba(0,0,0,.12);
-}
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -40px auto 5px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+    }
 
-.mobile-avatar img {
-    width: 60px;
-    height: 60px;
-    /* border-radius: 50%; */
-    object-fit: cover;
-}
+    .mobile-avatar img {
+        width: 60px;
+        height: 60px;
+        /* border-radius: 50%; */
+        object-fit: cover;
+    }
 }
 
 
@@ -421,7 +455,7 @@ padding-top: 15px;
 
     .social-buttons {
         display: flex;
-        }
+    }
 
     .social-buttons button {
         min-width: 70px;

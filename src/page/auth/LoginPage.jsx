@@ -7,11 +7,15 @@ import logo from "../../assets/user.png";
 import google from "../../assets/google1.png";
 import facebook from "../../assets/facebook1.png";
 import github from "../../assets/github1.png";
-
+import { showLoader, hideLoader } from "../../features/loader/loaderSlice";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../features/auth/authActions";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 function LoginPage() {
+    console.log(showLoader);
+    console.log(hideLoader);
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const dispatch = useDispatch();
@@ -19,32 +23,67 @@ function LoginPage() {
     const [userName, setUserName] = useState("");
     const [passwordHash, setPasswordHash] = useState("");
 
+    // const handleLogin = async () => {
+    //     const payload = {
+    //         name: userName,
+    //         password: passwordHash,
+    //     };
+    //     console.log(323233);
+
+    //     const result = await dispatch(loginUser(payload)).then((data) => {
+    //         console.log(data, data?.payload?.user,'2323');
+    //         if (data?.payload?.user) {
+    //             localStorage.setItem("user",JSON.stringify(data?.payload?.user))
+    //             localStorage.setItem("token", data?.payload?.token)
+    //             navigate("/dashboard");
+    //         } else {
+    //             alert("Invalid Username or Password");
+    //         }
+    //     }).catch((err) => {
+    //         console.log(err, 32323);
+
+    //     })
+
+
+
+    //     console.log(result,'result');
+
+
+    // };
     const handleLogin = async () => {
         const payload = {
             name: userName,
             password: passwordHash,
         };
-        // console.log(323233);
 
-        const result = await dispatch(loginUser(payload)).then((data) => {
-            console.log(data, data?.payload?.user,'2323');
+        dispatch(showLoader());
+
+        try {
+            const data = await dispatch(loginUser(payload));
+
             if (data?.payload?.user) {
-                localStorage.setItem("user",JSON.stringify(data?.payload?.user))
-                localStorage.setItem("token", data?.payload?.token)
-                navigate("/dashboard");
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(data.payload.user)
+                );
+
+                localStorage.setItem(
+                    "token",
+                    data.payload.token
+                );
+
+                setTimeout(() => {
+                    dispatch(hideLoader());
+                    navigate("/dashboard");
+                }, 100);
             } else {
+                dispatch(hideLoader());
                 alert("Invalid Username or Password");
             }
-        }).catch((err) => {
-            console.log(err, 32323);
-
-        })
-
-
-
-        // console.log(result,'result');
-
-
+        } catch (err) {
+            dispatch(hideLoader());
+            console.log(err);
+        }
     };
     return (
         <div className="login-page">
@@ -75,12 +114,27 @@ function LoginPage() {
                         placeholder="UserName"
                     />
                     <label>Password</label>
-                    <input
+                    {/* <input
                         type="password"
                         value={passwordHash}
                         onChange={(e) => setPasswordHash(e.target.value)}
                         placeholder="Password"
-                    />
+                    /> */}
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={passwordHash}
+                            onChange={(e) => setPasswordHash(e.target.value)}
+                            placeholder="Password"
+                        />
+
+                        <span
+                            className="eye-icon"
+                            onClick={() => setShowPassword(!showPassword)}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
                     <a href="/" className="forgot">
                         Forgot Password?
                     </a>
