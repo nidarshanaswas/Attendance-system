@@ -43,10 +43,7 @@ function Dashboard() {
         setFirstClockedIn(data?.payload?.firstClockIn?.firstClockInTime);
         setLastClockInDate(data?.payload?.firstClockIn?.clockInDate);
 
-        // if (data?.payload?.firstClockIn?.firstClockInTime) {
-        //   setIsClockedIn(true);
-
-        // }
+       
       });
 
       dispatch(getLastClockOut(user.id)).then((data) => {
@@ -55,17 +52,7 @@ function Dashboard() {
 
         setLastClockedOut(data?.payload?.clockOutTime);
       });
-      // dispatch(getTotalWorkedTime(user.id)).then((data) => {
-      //   console.log("totaldata", data);
-
-      //   setTotalWorkedTime(
-      //     data?.payload?.totalSeconds  || 0
-      //   );
-
-      //   setRecentClockInTime(
-      //     data?.payload?.recentClockInTime
-      //   );
-      // });
+      
 
       dispatch(getTotalWorkedTime(user.id)).then((data) => {
         console.log("totalwork", data);
@@ -115,17 +102,7 @@ function Dashboard() {
         h = 0;
       }
 
-      // const clockInDateTime = new Date(clockInDate);
-
-      // clockInDateTime.setHours(
-      //   h,
-      //   m,
-      //   s,
-      //   0
-      // );
-      // const runningSeconds = Math.floor(
-      //   (now - clockInDateTime) / 1000
-      // );
+      
       const [year, month, day] =
         clockInDate.split("-").map(Number);
       const clockInDateTime = new Date(
@@ -153,10 +130,7 @@ function Dashboard() {
         "runningSeconds:",
         runningSeconds
       );
-      // if (!isClockedIn) {
-      //   clearInterval(interval);
-      //   return;
-      // }
+      
       const finalSeconds = totalWorkedTime + runningSeconds;
 
       setWorkedTime(
@@ -166,11 +140,7 @@ function Dashboard() {
 
     return () => clearInterval(interval);
   }, [isClockedIn, recentClockInTime, totalWorkedTime, clockInDate]);
-  // const convertToSeconds = (time) => {
-  //   if(!time) return 0;
-  //   const [h,m,s] = time.split(":").map(Number);
-  //   return h * 3600 + m * 60 + s;
-  // };
+  
 
   const formatTime = (totalSeconds) => {
     const hrs = Math.floor(totalSeconds / 3600);
@@ -183,140 +153,7 @@ function Dashboard() {
     return `${hrs}h ${mins.toString()
       .padStart(2, "0")}m`;
   };
-  // const handleClockButton = async () => {
-  //   const userData = JSON.parse(localStorage.getItem("user"));
-
-  //   if (!isClockedIn) {
-  //     await dispatch(clockInUser({ employeeId: userData.id }));
-  //     await dispatch(getFirstClockIn(userData.id))
-  //     setIsClockedIn(true);
-  //     await dispatch(
-  //       clockInUser({
-  //         employeeId: userData.id,
-  //       })
-  //     );
-
-  //     const result = await dispatch(
-  //       getTotalWorkedTime(userData.id)
-  //     );
-
-  //     setTotalWorkedTime(
-  //       result.payload.totalSeconds || 0
-  //     );
-
-  //     setRecentClockInTime(
-  //       result.payload.recentClockInTime
-  //     );
-
-  //     setIsClockedIn(
-  //       !!result.payload.recentClockInTime
-  //     );
-  //   } else {
-  //     await dispatch(
-  //       clockOutUser({
-  //         employeeId: userData.id,
-  //       })
-  //     );
-
-  //     const result = await dispatch(
-  //       getTotalWorkedTime(userData.id)
-  //     );
-
-  //     const seconds =
-  //       result.payload.totalSeconds || 0;
-
-  //     setTotalWorkedTime(seconds);
-
-  //     setRecentClockInTime(null);
-
-  //     setWorkedTime(
-  //       formatTime(seconds)
-  //     );
-
-  //     setIsClockedIn(false);
-
-  //   }
-  // };
-  // const handleClockButton = async () => {
-  //   const userData = JSON.parse(localStorage.getItem("user"));
-  //     dispatch(showLoader());
-
-  //   if (!isClockedIn) {
-  //     await dispatch(clockInUser({employeeId: userData.id,})
-  //     );
-
-  //     const result = await dispatch(
-  //       getTotalWorkedTime(userData.id)
-  //     );
-
-  //     setTotalWorkedTime(
-  //       result.payload.totalSeconds || 0
-  //     );
-
-  //     setRecentClockInTime(
-  //       result.payload.recentClockInTime
-  //     );
-
-  //     setClockInDate(
-  //       result.payload.clockInDate
-  //     );
-
-  //     setIsClockedIn(
-  //       !!result.payload.recentClockInTime
-  //     );
-
-  //     const firstClockInResult =
-  //       await dispatch(
-  //         getFirstClockIn(userData.id)
-  //       );
-
-  //     setFirstClockedIn(
-  //       firstClockInResult?.payload?.firstClockIn
-  //         ?.firstClockInTime
-  //     );
-
-  //     setLastClockInDate(
-  //       firstClockInResult?.payload?.firstClockIn
-  //         ?.clockInDate
-  //     );
-  //   } else {
-
-  //     await dispatch(
-  //       clockOutUser({
-  //         employeeId: userData.id,
-  //       })
-  //     );
-  //     // console.log("ClockOut Response", response);
-  //     await new Promise((resolve) =>
-  //       setTimeout(resolve, 1000)
-  //     );
-
-  //     const result = await dispatch(
-  //       getTotalWorkedTime(userData.id)
-  //     );
-  //     console.log(result.payload.totalSeconds, result.payload, 88777);
-
-  //     const seconds =
-  //       result.payload.totalSeconds || 0;
-  //     console.log("Backend Seconds:", seconds);
-
-  //     setIsClockedIn(false);
-  //     setRecentClockInTime(null);
-  //     setClockInDate(null);
-
-  //     setTotalWorkedTime(seconds);
-  //     setWorkedTime(formatTime(seconds));
-
-  //     const lastClockOutResult =
-  //       await dispatch(
-  //         getLastClockOut(userData.id)
-  //       );
-
-  //     setLastClockedOut(
-  //       lastClockOutResult?.payload?.clockOutTime
-  //     );
-  //   }
-  // };
+ 
 
   const handleClockButton = async () => {
     const userData = JSON.parse(localStorage.getItem("user"));

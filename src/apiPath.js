@@ -12,7 +12,11 @@ export const apiPath = {
   getTotalWorkedTime: "attendance/working-hours",
   clockin: "attendance/clock-in",
   attendanceRange: "attendance/range",
-  attendanceList: "attendance/employees"
+  attendanceList: "attendance/employees",
+  employeeList: "user/employee-status",
+  createEmployee: "user/create",
+  updateEmployee: "user/update",
+  deleteEmployee: "user/delete",
 //   refresh: "badge/refresh",
 //   authLogin: "/auth/login",
 //   fyCode: "auth/fycode-list",
