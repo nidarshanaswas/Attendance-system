@@ -32,7 +32,7 @@ export const fetchAdminAttendanceApi = async ({
     query.push(`endDate=${today}`);
   }
 
-  if (status && status !== "All") {
+  if (status && status !== "ALL") {
     query.push(`status=${status}`);
   }
   
@@ -42,9 +42,8 @@ export const fetchAdminAttendanceApi = async ({
 
   url += `?${query.join("&")}`;
 
-  console.log("FINAL URL 👉", url);   // 🔥 debug
-
-  const res = await fetch(url);
+  console.log("FINAL URL 👉", url);   
+    const res = await fetch(url);
 
   if (!res.ok) {
     throw new Error("API failed");
@@ -103,4 +102,50 @@ export const fetchAttendanceListApi = async ({
   }
 
   return await res.json();
+};
+
+
+export const fetchDashboardData = async (employeeId) => {
+  const res = await fetch(
+    `${apiPath.API_URL}/${apiPath.dashboardData}/${employeeId}`
+    );
+
+  if(!res.ok){
+    throw new Error("Failed to fetch dashboard data")
+  }
+  return res.json();
+};
+
+export const fetchDashboardTable = async () => {
+  const res = await fetch(
+    `${apiPath.API_URL}/${apiPath.dashboardList}`
+  );
+
+  if(!res.ok){
+    throw new Error("Failed to fetch the data")
+  }
+
+  return res.json();
+}
+
+
+export const saveManualAttendanceApi = async (data) => {
+  const response = await fetch(
+    `${apiPath.API_URL}/attendance/manual`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    throw new Error(result.message || "Failed to save attendance");
+  }
+
+  return result;
 };

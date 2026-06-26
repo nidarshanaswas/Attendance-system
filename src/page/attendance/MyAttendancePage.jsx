@@ -99,7 +99,7 @@ function Attendance() {
             <option value="PRESENT">Present</option>
             <option value="LEAVE">Leave</option>
             <option value="LATE">Late</option>
-          </select>
+          </select> 
         </div>
 
         <div>

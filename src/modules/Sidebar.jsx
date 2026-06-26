@@ -70,12 +70,12 @@ function Sidebar({ open, setOpen }) {
                             <span className={`menu-text ${open ? "show" : ""}`}>Employees</span>
                         </NavLink>
                     </li>
-                    <li>
+                    {/* <li>
                         <NavLink to="/Reports" data-title="Reports" onClick={() => dispatch(showLoader())}>
                             <span><img src={report} alt="report" className="small-logos" /></span>
                             <span className={`menu-text ${open ? "show" : ""}`}>Reports</span>
                         </NavLink>
-                    </li>
+                    </li> */}
                 </ul>
             </div>
         </>

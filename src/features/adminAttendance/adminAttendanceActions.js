@@ -27,7 +27,11 @@
 
   import { fetchAdminAttendanceApi } from "./adminAttendanceApi";
   import { fetchAttendanceListApi } from "./adminAttendanceApi";
+  import { fetchDashboardData } from "./adminAttendanceApi";
+  import { fetchDashboardTable } from "./adminAttendanceApi";
   import { createAsyncThunk } from "@reduxjs/toolkit";
+  import { saveManualAttendanceApi } from "./adminAttendanceApi";
+
 
   export const fetchAdminAttendance = createAsyncThunk(
     "adminAttendance/fetch",
@@ -70,3 +74,46 @@
       }
     }
   );
+
+  export const fetchDashboardDataThunk = createAsyncThunk(
+    "attendance/dashboard",
+    async (employeeId, {rejectWithValue}) => {
+      try{
+        const res = await fetchDashboardData(employeeId);
+        return res;
+      }catch(err){
+        return  rejectWithValue(err.message);
+      }
+    }
+  );
+
+export const fetchDashboardTableApi = createAsyncThunk(
+  "attendance/dashboardlist",
+  async (employeeId, { rejectWithValue }) => {
+    try {
+      const res = await fetchDashboardTable();
+
+      console.log("Dashboard Table API Response:", res);
+
+      return res;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+
+export const saveManualAttendance = createAsyncThunk(
+  "attendance/manualEntry",
+  async (attendanceData, { rejectWithValue }) => {
+    try {
+      const res = await saveManualAttendanceApi(attendanceData);
+
+      return res;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
+  

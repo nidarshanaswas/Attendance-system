@@ -13,7 +13,7 @@ function AdminAttendance() {
   const attendanceRaw = useSelector(selectAttendance);
   const [fromDate, setFromDate] = useState("");
   const [toDate, setToDate] = useState("")
-  const [status, setStatus] = useState("All")
+  const [status, setStatus] = useState("ALL")
   const [page, setPage] = useState(1);
   const totalPages = useSelector(selectTotalPages);
   const currentPage = useSelector(selectCurrentPage);
