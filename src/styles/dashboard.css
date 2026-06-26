@@ -40,7 +40,14 @@
   margin-top: 10px;
   color: #111827;
 }
-
+.heading{
+  margin-left: 3px;
+}
+.heading h2{
+  color: #1e47b8;
+  font-size: 20px;
+  font-weight: bold;
+}
   @media (max-width: 768px) {
 
 .dashboard-page {

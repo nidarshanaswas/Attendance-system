@@ -5,7 +5,9 @@ import Table from "../../components/Table";
 import "../../styles/dashboard.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAttendanceList } from "../../features/adminAttendance/adminAttendanceActions";
-import { selectAttendanceList } from "../../features/adminAttendance/adminAttendanceSelectors";
+// import { selectAttendanceList } from "../../features/adminAttendance/adminAttendanceSelectors";
+import { selectDashboard, selectDashboardTable } from "../../features/adminAttendance/adminAttendanceSelectors";
+import { fetchDashboardDataThunk, fetchDashboardTableApi, } from "../../features/adminAttendance/adminAttendanceActions";
 import {
   getFirstClockIn,
   getLastClockOut,
@@ -25,12 +27,21 @@ function Dashboard() {
   const [firstClockedIn, setFirstClockedIn] = useState(null);
   const [lastClockedOut, setLastClockedOut] = useState(null);
   const dispatch = useDispatch();
-  const attendanceRaw = useSelector(selectAttendanceList);
+  const attendanceRaw = useSelector(selectDashboardTable);
 
   const firstClockIn = useSelector((state) => state.attendance.firstClockIn);
 
   const lastClockOut = useSelector((state) => state.attendance.lastClockOut);
   const [clockInDate, setClockInDate] = useState(null);
+  const dashboard = useSelector(selectDashboard);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user?.id) {
+      dispatch(fetchDashboardDataThunk(user.id));
+    }
+  }, [dispatch]);
   // console.log(firstClockIn);
   // console.log(lastClockOut);
   useEffect(() => {
@@ -76,13 +87,12 @@ function Dashboard() {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(
-      fetchAttendanceList({
-        page: 1,
-        size: 5,
-      }),
-    );
-  }, [dispatch]);
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user?.id) {
+    dispatch(fetchDashboardTableApi());
+  }
+}, [dispatch]);
 
   useEffect(() => {
     if (!isClockedIn || !recentClockInTime || !clockInDate) return;
@@ -240,20 +250,25 @@ function Dashboard() {
       }, 300);
     }
   };
-  const attendanceData = (attendanceRaw || []).map((item) => ({
-    employee: item.name || "-",
+  console.log("attendance list", attendanceRaw)
+  const attendanceData = (attendanceRaw?.attendance || []).map((item) => ({
+    employee: item.employeeName || "-",
     date: item.attendanceDate,
-    clockIn: item.lastClockIn || "-",
-    clockOut: item.lastClockOut || "-",
+    firstIn: item.firstClockIn || "-",
+    clockIn: item.clockInTime || "-",
+    clockOut: item.clockOutTime || "-",
     hours: item.totalHours || "-",
+    late: item.lateHours || "-",
     status: item.status || "-",
   }));
   const columns = [
     { header: "Employee", key: "employee" },
     { header: "Date", key: "date" },
-    { header: "RecentClockIn", key: "clockIn" },
-    { header: "RecentClockOut", key: "clockOut" },
+    {header: "FirstClockIn", key:"firstIn"},
+    { header: "ClockIn", key: "clockIn" },
+    { header: "ClockOut", key: "clockOut" },
     { header: "Hours", key: "hours" },
+    {header: "Late hours", key: "late"},
     {
       header: "Status",
       render: (item) => (
@@ -272,10 +287,14 @@ function Dashboard() {
         buttonText={isClockedIn ? "Clock Out" : "Clock In"}
         onButtonClick={handleClockButton}
       />
+      <div className="heading">
+            <h2>My Attendance</h2>
+            </div>
+
       <div className="dashboard-cards">
-        <Card title="This Week" value="38h 20m" subtitle="+2h vs last week" />
-        <Card title="Days Present" value="4 / 5" subtitle="This week" />
-        <Card title="Late Arrivals" value="1" subtitle="This month" />
+        <Card title="This Week" value={dashboard?.totalHoursWorkedThisWeek} />
+        <Card title="Days Present" value={dashboard?.presentDaysThisWeek}/>
+        <Card title="Late Arrivals" value={dashboard?.lateArrivalsThisWeek} />
       </div>
       {/* <Table data={attendanceData} /> */}
       <div className="table-box">
