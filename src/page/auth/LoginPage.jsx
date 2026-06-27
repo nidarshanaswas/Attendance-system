@@ -11,6 +11,7 @@ import { showLoader, hideLoader } from "../../features/loader/loaderSlice";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../features/auth/authActions";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function LoginPage() {
     console.log(showLoader);
@@ -28,28 +29,37 @@ function LoginPage() {
     //         name: userName,
     //         password: passwordHash,
     //     };
-    //     console.log(323233);
 
-    //     const result = await dispatch(loginUser(payload)).then((data) => {
-    //         console.log(data, data?.payload?.user,'2323');
+    //     dispatch(showLoader());
+
+    //     try {
+    //         const data = await dispatch(loginUser(payload));
+
     //         if (data?.payload?.user) {
-    //             localStorage.setItem("user",JSON.stringify(data?.payload?.user))
-    //             localStorage.setItem("token", data?.payload?.token)
-    //             navigate("/dashboard");
+    //             localStorage.setItem(
+    //                 "user",
+    //                 JSON.stringify(data.payload.user)
+    //             );
+
+    //             localStorage.setItem(
+    //                 "token",
+    //                 data.payload.token
+    //             );
+
+    //             setTimeout(() => {
+    //                 dispatch(hideLoader());
+    //                 navigate("/dashboard");
+    //             }, 100);
     //         } else {
+    //             dispatch(hideLoader());
     //             alert("Invalid Username or Password");
     //         }
-    //     }).catch((err) => {
-    //         console.log(err, 32323);
-
-    //     })
-
-
-
-    //     console.log(result,'result');
-
-
+    //     } catch (err) {
+    //         dispatch(hideLoader());
+    //         console.log(err);
+    //     }
     // };
+
     const handleLogin = async () => {
         const payload = {
             name: userName,
@@ -59,30 +69,40 @@ function LoginPage() {
         dispatch(showLoader());
 
         try {
-            const data = await dispatch(loginUser(payload));
+            const data = await dispatch(
+                loginUser(payload)
+            ).unwrap();
 
-            if (data?.payload?.user) {
-                localStorage.setItem(
-                    "user",
-                    JSON.stringify(data.payload.user)
-                );
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
 
-                localStorage.setItem(
-                    "token",
-                    data.payload.token
-                );
+            localStorage.setItem(
+                "token",
+                data.token
+            );
 
-                setTimeout(() => {
-                    dispatch(hideLoader());
-                    navigate("/dashboard");
-                }, 100);
-            } else {
-                dispatch(hideLoader());
-                alert("Invalid Username or Password");
-            }
-        } catch (err) {
+            toast.success("Login successful");
+
             dispatch(hideLoader());
-            console.log(err);
+
+            navigate("/dashboard");
+        } catch (error) {
+            dispatch(hideLoader());
+
+            console.log("Login Error:", error);
+
+            if (Array.isArray(error?.errors)) {
+                error.errors.forEach((msg) =>
+                    toast.error(msg)
+                );
+            } else {
+                toast.error(
+                    error?.message ||
+                    "Invalid Username or Password"
+                );
+            }
         }
     };
     return (
@@ -114,12 +134,7 @@ function LoginPage() {
                         placeholder="UserName"
                     />
                     <label>Password</label>
-                    {/* <input
-                        type="password"
-                        value={passwordHash}
-                        onChange={(e) => setPasswordHash(e.target.value)}
-                        placeholder="Password"
-                    /> */}
+
                     <div className="password-container">
                         <input
                             type={showPassword ? "text" : "password"}

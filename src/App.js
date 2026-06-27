@@ -17,7 +17,8 @@ import EmployeeManager from './page/employees/EmployeeManagerPage.jsx'
 import Reports from './page/reports/ReportsPage.jsx'
 import LoginPage from "./page/auth/LoginPage";
 import Spinner from './components/Spinner.jsx';
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -74,6 +75,7 @@ function App() {
           }
         />
       </Routes>
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   );
 }
