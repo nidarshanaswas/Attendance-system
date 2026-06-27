@@ -1,101 +1,3 @@
-// import React, { useState, useEffect } from "react";
-
-// function EmployeeModal({ employee, onClose }) {
-//   const [formData, setFormData] = useState({
-//     name: "",
-//     email: "",
-//     passwordHash: "",
-//     role: "",
-//     department: "",
-//   });
-
-//   useEffect(() => {
-//     if (employee) {
-//       setFormData({
-//         name: employee.name,
-//         email: employee.email,
-//         passwordHash: "",
-//         role: employee.role,
-//         department: employee.department,
-//       });
-//     }
-//   }, [employee]);
-
-//   const handleChange = (e) => {
-//     setFormData({
-//       ...formData,
-//       [e.target.name]: e.target.value,
-//     });
-//   };
-
-//   return (
-//     <div className="modal-overlay">
-//       <div className="employee-modal">
-//         <h2>
-//           {employee ? "Edit Employee" : "Add Employee"}
-//         </h2>
-
-//         <input
-//           name="name"
-//           placeholder="Name"
-//           value={formData.name}
-//           onChange={handleChange}
-//         />
-
-//         <input
-//           name="email"
-//           placeholder="Email"
-//           value={formData.email}
-//           onChange={handleChange}
-//         />
-
-//         {!employee && (
-//           <input
-//             name="passwordHash"
-//             type="password"
-//             placeholder="Password"
-//             value={formData.passwordHash}
-//             onChange={handleChange}
-//           />
-//         )}
-
-//         <select
-//           name="role"
-//           value={formData.role}
-//           onChange={handleChange}
-//         >
-//           <option value="">Select Role</option>
-//           <option value="Admin">Admin</option>
-//           <option value="Manager">Manager</option>
-//           <option value="Employee">Employee</option>
-//         </select>
-
-//         <input
-//           name="department"
-//           placeholder="Department"
-//           value={formData.department}
-//           onChange={handleChange}
-//         />
-
-//         <div className="modal-buttons">
-//           <button className="save-btn">
-//             {employee ? "Update" : "Save"}
-//           </button>
-
-//           <button
-//             className="cancel-btn"
-//             onClick={onClose}
-//           >
-//             Cancel
-//           </button>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default EmployeeModal;
-
 import React, { useState, useEffect } from "react";
 import {
     FaUser, FaEnvelope, FaLock, FaBuilding, FaUserShield,
@@ -105,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { createEmployee, updateEmployee, getEmployees, }
     from "../../features/employees/employeesActions";
 
-function EmployeeModal({ employee, onClose, onSave, }) {
+function EmployeeModel({ employee, onClose, onSave, }) {
     const dispatch = useDispatch();
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -137,11 +39,11 @@ function EmployeeModal({ employee, onClose, onSave, }) {
             [e.target.name]: e.target.value,
         });
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
         console.log("Button clicked");
         console.log("Submitting :", formData);
-         onSave(formData);
+        await onSave(formData);
     };
     const handleSave = async () => {
         console.log("Received Data :", formData);
@@ -182,26 +84,143 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                 size: 5,
                 name: "",
             })
-        );  
+        );
 
         onClose();
     };
+    // return (
+    //     <div className="emp-modal-overlay-popup">
+    //         <div className="emp-modal-popup">
+
+    //             <h2 className="modal-title-popup">
+    //                 {employee ? "Edit Employee" : "Add Employee"}
+    //             </h2>
+
+    //             <div className="form-group-popup">
+    //                 <div className="icon-box-popup">
+    //                     <FaUser />
+    //                 </div>
+
+    //                 <div className="field-box-popup">
+    //                     <label>Name</label>
+    //                     <input
+    //                         name="name"
+    //                         placeholder="Enter name"
+    //                         value={formData.name}
+    //                         onChange={handleChange}
+    //                     />
+    //                 </div>
+    //             </div>
+
+    //             <div className="form-group-popup">
+    //                 <div className="icon-box-popup">
+    //                     <FaEnvelope />
+    //                 </div>
+
+    //                 <div className="field-box-popup">
+    //                     <label>Email</label>
+    //                     <input
+    //                         name="email"
+    //                         placeholder="Enter email"
+    //                         value={formData.email}
+    //                         onChange={handleChange}
+    //                     />
+    //                 </div>
+    //             </div>
+
+    //             {!employee && (
+    //                 <div className="form-group-popup">
+    //                     <div className="icon-box-popup">
+    //                         <FaLock />
+    //                     </div>
+
+    //                     <div className="field-box-popup password-wrapper-popup ">
+    //                         <label>Password</label>
+
+    //                         <input
+    //                             name="passwordHash"
+    //                             type={showPassword ? "text" : "password"}
+    //                             placeholder="Enter password"
+    //                             value={formData.passwordHash}
+    //                             onChange={handleChange}
+    //                         />
+
+    //                         <span
+    //                             className="eye-icon-popup"
+    //                             onClick={() => setShowPassword(!showPassword)}
+    //                         >
+    //                             {showPassword ? <FaEyeSlash /> : <FaEye />}
+    //                         </span>
+    //                     </div>
+    //                 </div>
+    //             )}
+
+    //             <div className="form-group-popup">
+    //                 <div className="icon-box-popup">
+    //                     <FaUserShield />
+    //                 </div>
+
+    //                 <div className="field-box-popup">
+    //                     <label>Role</label>
+
+    //                     <select
+    //                         name="role"
+    //                         value={formData.role}
+    //                         onChange={handleChange}
+    //                     >
+    //                         <option value="">Select Role</option>
+    //                         <option value="Admin">Admin</option>
+    //                         <option value="Manager">Manager</option>
+    //                         <option value="Employee">Employee</option>
+    //                     </select>
+    //                 </div>
+    //             </div>
+
+    //             <div className="form-group-popup">
+    //                 <div className="icon-box-popup">
+    //                     <FaBuilding />
+    //                 </div>
+
+    //                 <div className="field-box-popup">
+    //                     <label>Department</label>
+
+    //                     <input
+    //                         name="department"
+    //                         placeholder="Enter department"
+    //                         value={formData.department}
+    //                         onChange={handleChange}
+    //                     />
+    //                 </div>
+    //             </div>
+
+    //             <div className="emp-modal-footer-popup">
+    //                 <button className="save-btn-popup" onClick={handleSubmit}>
+    //                     {employee ? "Update" : "Save"}
+    //                 </button>
+
+    //                 <button
+    //                     className="cancel-btn-popup"
+    //                     onClick={onClose}
+    //                 >
+    //                     Cancel
+    //                 </button>
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
+
     return (
-        <div className="emp-modal-overlay-popup">
-            <div className="emp-modal-popup">
+    <div className="emp-modal-overlay-popup">
+        <div className="emp-modal-popup">
+            <h2 className="modal-title-popup">
+                {employee ? "Edit Employee" : "Add Employee"}
+            </h2>
 
-                <h2 className="modal-title-popup">
-                    {employee ? "Edit Employee" : "Add Employee"}
-                </h2>
-
-                {/* Name */}
-                <div className="form-group-popup">
-                    <div className="icon-box-popup">
-                        <FaUser />
-                    </div>
-
+            <form onSubmit={handleSubmit} className="emp-modal-form-grid">
+                {/* Name - Full Width */}
+                <div className="form-group-popup full-width">
+                    <label className="field-label-popup">Name</label>
                     <div className="field-box-popup">
-                        <label>Name</label>
                         <input
                             name="name"
                             placeholder="Enter name"
@@ -211,14 +230,10 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 </div>
 
-                {/* Email */}
-                <div className="form-group-popup">
-                    <div className="icon-box-popup">
-                        <FaEnvelope />
-                    </div>
-
+                {/* Email - Full Width */}
+                <div className="form-group-popup full-width">
+                    <label className="field-label-popup">Email</label>
                     <div className="field-box-popup">
-                        <label>Email</label>
                         <input
                             name="email"
                             placeholder="Enter email"
@@ -228,16 +243,11 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 </div>
 
-                {/* Password */}
+                {/* Password - Full Width (Conditional) */}
                 {!employee && (
-                    <div className="form-group-popup">
-                        <div className="icon-box-popup">
-                            <FaLock />
-                        </div>
-
-                        <div className="field-box-popup password-wrapper-popup ">
-                            <label>Password</label>
-
+                    <div className="form-group-popup full-width">
+                        <label className="field-label-popup">Password</label>
+                        <div className="field-box-popup password-wrapper-popup">
                             <input
                                 name="passwordHash"
                                 type={showPassword ? "text" : "password"}
@@ -245,7 +255,6 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                                 value={formData.passwordHash}
                                 onChange={handleChange}
                             />
-
                             <span
                                 className="eye-icon-popup"
                                 onClick={() => setShowPassword(!showPassword)}
@@ -256,15 +265,10 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 )}
 
-                {/* Role */}
-                <div className="form-group-popup">
-                    <div className="icon-box-popup">
-                        <FaUserShield />
-                    </div>
-
-                    <div className="field-box-popup">
-                        <label>Role</label>
-
+                {/* Role - Half Width */}
+                <div className="form-group-popup half-width">
+                    <label className="field-label-popup">Role</label>
+                    <div className="field-box-popup select-wrapper-popup">
                         <select
                             name="role"
                             value={formData.role}
@@ -278,15 +282,10 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 </div>
 
-                {/* Department */}
-                <div className="form-group-popup">
-                    <div className="icon-box-popup">
-                        <FaBuilding />
-                    </div>
-
+                {/* Department - Half Width */}
+                <div className="form-group-popup half-width">
+                    <label className="field-label-popup">Department</label>
                     <div className="field-box-popup">
-                        <label>Department</label>
-
                         <input
                             name="department"
                             placeholder="Enter department"
@@ -296,21 +295,23 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 </div>
 
+                {/* Form Footer Action Buttons */}
                 <div className="emp-modal-footer-popup">
-                    <button className="save-btn-popup" onClick={handleSubmit}>
-                        {employee ? "Update" : "Save"}
-                    </button>
-
                     <button
+                        type="button"
                         className="cancel-btn-popup"
                         onClick={onClose}
                     >
                         Cancel
                     </button>
+                    <button type="submit" className="save-btn-popup">
+                        {employee ? "Update" : "Save "}
+                    </button>
                 </div>
-            </div>
+            </form>
         </div>
-    );
+    </div>
+);
 }
 
-export default EmployeeModal;
+export default EmployeeModel;

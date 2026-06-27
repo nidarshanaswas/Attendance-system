@@ -20,10 +20,5 @@ export const apiPath = {
   dashboardData: "attendance/dashboard",
   dashboardList: "attendance/dashboardlist",
   manualEntry: "attendance/manual",
-//   refresh: "badge/refresh",
-//   authLogin: "/auth/login",
-//   fyCode: "auth/fycode-list",
-//   tokenCreate: "/auth/token-create",
-//   companyList: "/company",
 
 };

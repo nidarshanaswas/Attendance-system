@@ -15,21 +15,35 @@ export const getEmployees = createAsyncThunk(
 
 export const createEmployee = createAsyncThunk(
   "employees/createEmployee",
-  async (payload) => {
-    return await createEmployeeApi(payload);
+  async (payload,  { rejectWithValue }) => {
+    try {
+      return await createEmployeeApi(payload);
+    } catch (err) {
+      return rejectWithValue(err);
+    }
   }
 );
 
 export const updateEmployee = createAsyncThunk(
   "employees/updateEmployee",
-  async ({ id, payload }) => {
-    return await updateEmployeeApi(id, payload);
+  async ({ id, payload} ,{ rejectWithValue }) => {
+    try{
+      return await updateEmployeeApi(id, payload);
+    }catch(err){
+      return rejectWithValue(err);
+    }
+    
   }
 );
 
 export const deleteEmployee = createAsyncThunk(
   "employees/deleteEmployee",
-  async (id) => {
-    return await deleteEmployeeApi(id);
+  async (id,{ rejectWithValue }) => {
+    try{
+      return await deleteEmployeeApi(id);
+    }catch(err){
+      return rejectWithValue(err);
+    }
+    
   }
 );

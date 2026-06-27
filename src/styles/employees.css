@@ -47,8 +47,9 @@
 }
 
 .status-active {
-    background: #dcfce7;
-    color: green;
+    background: #cafcdb !important;
+    color: rgb(1, 110, 1) ;
+    font-weight: 500;
     padding: 6px 15px;
     border-radius: 20px;
 }
@@ -95,217 +96,175 @@
     color: white;
     border-radius: 8px;
 }
-
-/* Modal */
-
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.45);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.employee-modal {
-  width: 450px;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-}
-
-.employee-modal h2 {
-  margin-bottom: 20px;
-}
-
-.employee-modal input,
-.employee-modal select {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 18px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: end;
-  gap: 15px;
-}
-
-.save-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 8px;
-}
-
-.cancel-btn {
-  background: #e5e7eb;
-  border: none;
-  padding: 10px 22px;
-  border-radius: 8px;
-} */
-
+/* --- Modal Core Cleanup --- */
 .emp-modal-overlay-popup {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(15, 23, 42, 0.15); /* Soft premium backdrop tint */
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-.emp-modal-header-popup {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
 .emp-modal-popup {
-    width: 450px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px;
+    width: 500px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 }
 
 .modal-title-popup {
-    text-align: center;
-    margin-bottom: 25px;
+    text-align: left; /* Changed from center to left */
+    margin-bottom: 24px;
+    font-size: 22px;
+    font-weight: 700;
     color: #1e3a8a;
+}
+
+/* --- Form Layout Grid --- */
+.emp-modal-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
 }
 
 .form-group-popup {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 18px;
+    flex-direction: column;
+    margin-bottom: 4px;
 }
 
-.icon-box-popup {
-    width: 45px;
-    height: 45px;
-    background: #eef4ff;
-    color: #2563eb;
-    border-radius: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 20px;
+.form-group-popup.full-width {
+    grid-column: span 2;
 }
 
-.form-group-popup input,
-.form-group-popup select,
-.password-wrapper-popup input {
-    width: 100%;
-    height: 45px;
-    border: 1px solid #d9d9d9;
-    border-radius: 12px;
-    padding: 0 15px;
-    font-size: 15px;
-    outline: none;
+.form-group-popup.half-width {
+    grid-column: span 1;
 }
 
-.form-group-popup input:focus,
-.form-group-popup select:focus,
-.password-wrapper-popup input:focus {
-    border-color: #2563eb;
-}
-
-.password-wrapper-popup {
-    width: 100%;
-    position: relative;
-}
-
-.eye-icon-popup {
-    position: absolute;
-    right: 15px;
-    top: 36px;
-    cursor: pointer;
-    color: gray;
-}
-
-.emp-modal-footer-popup {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap;
-}
-
-.save-btn-popup,
-.cancel-btn-popup {
-    width: 100px;
-    height: 40px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.save-btn-popup {
-    background: #2563eb;
-    color: white;
-}
-
-.cancel-btn-popup {
-    background: #e5e7eb;
+/* --- Labels and Inputs --- */
+.field-label-popup {
+    font-size: 14px;
+    font-weight: 500;
+    color: #71717a; /* Muted slate look for labels */
+    margin-bottom: 6px;
 }
 
 .field-box-popup {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.field-box-popup label {
-    font-size: 14px;
-    font-weight: 600;
-    color: #1f2937;
-    margin-bottom: 6px;
+    position: relative;
+    width: 100%;
 }
 
 .field-box-popup input,
 .field-box-popup select {
     width: 100%;
-    height: 42px;
-    border: 1px solid #d9d9d9;
-    border-radius: 12px;
-    padding: 0 14px;
-    font-size: 14px;
+    height: 46px;
+    border: 1px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 0 16px;
+    font-size: 15px;
+    color: #18181b;
+    background-color: #ffffff;
     outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
 }
 
 .field-box-popup input:focus,
 .field-box-popup select:focus {
     border-color: #2563eb;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.06);
 }
 
-/* 
-@media (max-width: 768px) {
-  .emp-modal-footer {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-  }
+/* --- Handle Inner Form Element Icons --- */
+.password-wrapper-popup input {
+    padding-right: 44px;
+}
 
-  .save-btn,
-  .cancel-btn-popup {
-    width: 48%;
-    height: 38px;
+.eye-icon-popup {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #71717a;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+/* Select element native cleaner styling override */
+.field-box-popup select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2371717a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+    padding-right: 40px;
+}
+
+/* --- Footer and Right-Aligned Buttons --- */
+.emp-modal-footer-popup {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end; /* Moves buttons to bottom right like image 1 */
+    gap: 12px;
+    margin-top: 16px;
+}
+.save-btn-popup,
+.cancel-btn-popup {
+    height: 42px;
+    padding: 0 24px;
+    border: 1px solid transparent;
+    border-radius: 8px;
     font-size: 14px;
-  }
-}    */
-/* ================= TABLET ================= */
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.save-btn-popup {
+    background: #1d4ed8;
+    color: white;
+}
+
+.save-btn-popup:hover {
+    background: #1e40af;
+}
+
+.cancel-btn-popup {
+    background: #ffffff;
+    color: #18181b;
+    border-color: #e4e4e7;
+}
+
+.cancel-btn-popup:hover {
+    background: #f4f4f5;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+    .emp-modal-popup {
+        width: 90%;
+        padding: 24px;
+    }
+    .emp-modal-form-grid {
+        grid-template-columns: 1fr;
+    }
+    .form-group-popup.half-width {
+        grid-column: span 2;
+    }
+    .emp-modal-footer-popup {
+        grid-column: span 2;
+        flex-direction: column-reverse;
+    }
+    .save-btn-popup, .cancel-btn-popup {
+        width: 100%;
+    }
+}
 @media (max-width: 1024px) {
     .employee-page {
         padding: 18px;
@@ -320,7 +279,6 @@
     }
 }
 
-/* ================= MOBILE ================= */
 @media (max-width: 768px) {
     .employee-page {
         padding: 15px;
@@ -377,7 +335,6 @@
         margin-top: -40px;
     }
 
-    /* Modal */
 
     .emp-modal-popup {
         width: 95%;
@@ -417,7 +374,6 @@
     }
 }
 
-/* ================= SMALL MOBILE ================= */
 @media (max-width: 480px) {
     .employee-page {
         padding: 10px;
@@ -454,7 +410,6 @@
         padding: 7px 10px;
     }
 
-    /* Modal */
 
     .emp-modal-popup {
         width: 96%;
@@ -497,7 +452,6 @@
     }
 }
 
-/* ================= FOLD DEVICES ================= */
 @media (max-width: 360px) {
     .emp-modal-popup {
         padding: 12px;
@@ -527,7 +481,6 @@
     }
 }
 
-/* ================= NEST HUB ================= */
 @media (max-height: 700px) {
     .emp-modal-overlay-popup {
         align-items: flex-start;

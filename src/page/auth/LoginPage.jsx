@@ -23,34 +23,7 @@ function LoginPage() {
     const [userName, setUserName] = useState("");
     const [passwordHash, setPasswordHash] = useState("");
 
-    // const handleLogin = async () => {
-    //     const payload = {
-    //         name: userName,
-    //         password: passwordHash,
-    //     };
-    //     console.log(323233);
-
-    //     const result = await dispatch(loginUser(payload)).then((data) => {
-    //         console.log(data, data?.payload?.user,'2323');
-    //         if (data?.payload?.user) {
-    //             localStorage.setItem("user",JSON.stringify(data?.payload?.user))
-    //             localStorage.setItem("token", data?.payload?.token)
-    //             navigate("/dashboard");
-    //         } else {
-    //             alert("Invalid Username or Password");
-    //         }
-    //     }).catch((err) => {
-    //         console.log(err, 32323);
-
-    //     })
-
-
-
-    //     console.log(result,'result');
-
-
-    // };
-    const handleLogin = async () => {
+        const handleLogin = async () => {
         const payload = {
             name: userName,
             password: passwordHash,
@@ -114,12 +87,7 @@ function LoginPage() {
                         placeholder="UserName"
                     />
                     <label>Password</label>
-                    {/* <input
-                        type="password"
-                        value={passwordHash}
-                        onChange={(e) => setPasswordHash(e.target.value)}
-                        placeholder="Password"
-                    /> */}
+                    
                     <div className="password-container">
                         <input
                             type={showPassword ? "text" : "password"}

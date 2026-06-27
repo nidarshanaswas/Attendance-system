@@ -9,11 +9,12 @@ export async function getEmployeesApi(
   const response = await fetch(
     `${API_URL}/employee-status?page=${page}&size=${size}&name=${name}`
   );
+  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to fetch employees");
+    return Promise.reject(data);
   }
-  return await response.json();
+  return data;
 }
 
 export async function createEmployeeApi(payload) {
@@ -27,16 +28,16 @@ export async function createEmployeeApi(payload) {
     }
   );
   const data = await response.json();
-  
+
   if (!response.ok) {
-    throw new Error("Failed to create employee");
+    return Promise.reject(data);
   }
-  return await response.json();
+  return data;
 }
 
 export async function updateEmployeeApi(id, payload) {
-    console.log(payload);
-    
+  console.log(payload);
+
   const response = await fetch(
     `${API_URL}/update/${id}`,
     {
@@ -47,11 +48,11 @@ export async function updateEmployeeApi(id, payload) {
       body: JSON.stringify(payload),
     }
   );
-
+  const data = await response.json();
   if (!response.ok) {
-    throw new Error("Failed to update employee");
+    return Promise.reject(data);
   }
-  return await response.json();
+  return data;
 }
 
 export async function deleteEmployeeApi(id) {
@@ -61,9 +62,11 @@ export async function deleteEmployeeApi(id) {
       method: "DELETE",
     }
   );
+  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error("Failed to delete employee");
+    return Promise.reject(data);
   }
-  return await response.json();
+  return data
+
 }
