@@ -20,6 +20,8 @@ export const apiPath = {
   dashboardData: "attendance/dashboard",
   dashboardList: "attendance/dashboardlist",
   manualEntry: "attendance/manual",
+  employeeEmails: "user/employee-emails",
+  employeeDetails: "user/employee-details"
 //   refresh: "badge/refresh",
 //   authLogin: "/auth/login",
 //   fyCode: "auth/fycode-list",

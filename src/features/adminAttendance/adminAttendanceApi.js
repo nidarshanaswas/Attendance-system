@@ -128,10 +128,33 @@ export const fetchDashboardTable = async () => {
   return res.json();
 }
 
+export const fetchEmployeeEmailsApi = async () => {
+  const res = await fetch(
+    `${apiPath.API_URL}/${apiPath.employeeEmails}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed employee emails");
+  }
+
+  return res.json();
+};
+
+export const fetchEmployeeDetailsApi = async (id) => {
+  const res = await fetch(
+    `${apiPath.API_URL}/${apiPath.employeeDetails}/${id}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed employee details");
+  }
+
+  return res.json();
+};
 
 export const saveManualAttendanceApi = async (data) => {
-  const response = await fetch(
-    `${apiPath.API_URL}/attendance/manual`,
+  const res = await fetch(
+    `${apiPath.API_URL}/${apiPath.manualEntry}`,
     {
       method: "POST",
       headers: {
@@ -141,11 +164,9 @@ export const saveManualAttendanceApi = async (data) => {
     }
   );
 
-  const result = await response.json();
-
-  if (!response.ok) {
-    throw new Error(result.message || "Failed to save attendance");
+  if (!res.ok) {
+    throw new Error("Failed to save attendance");
   }
 
-  return result;
+  return res.json();
 };

@@ -55,7 +55,7 @@ function Attendance() {
   }, [userId, filters, page, dispatch]);
 
   const listData = (attendanceRaw || []).map((item) => ({
-    employee: item.name || "-",
+    employee: item.employeeName || "-",
     date: item.attendanceDate,
     clockIn: item.lastClockIn || "-",
     clockOut: item.lastClockOut || "-",

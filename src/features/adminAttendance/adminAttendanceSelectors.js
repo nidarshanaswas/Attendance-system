@@ -10,8 +10,6 @@ export const selectTotalPages = (state) => state.myAttendance.totalPages;
 export const selectCurrentPage = (state) => state.myAttendance.currentPage;
 export const selectTotalRecords = (state) => state.myAttendance.totalRecords;
 
-export const selectManualEntry = (state) => state.adminAttendance.manualEntry;
-
-export const selectManualLoading = (state) => state.adminAttendance.manualLoading;
-
-export const selectManualError = (state) => state.adminAttendance.manualError;
+export const selectManualEntry = (state) => state.MyAttendance.manualEntry;
+export const selectManualLoading = (state) => state.MyAttendance.manualLoading;
+export const selectManualError = (state) => state.MyAttendance.manualError;

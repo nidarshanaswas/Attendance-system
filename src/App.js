@@ -20,6 +20,7 @@ import Spinner from './components/Spinner.jsx';
 
 
 
+
 function App() {
   const [open, setOpen] = useState(false);
   const loading = useSelector(selectLoading);
@@ -66,6 +67,8 @@ function App() {
                   <Route path="/EmployeeManager" element={<EmployeeManager />} />
                   <Route path="/Reports" element={<Reports />} />
                 </Routes>
+
+                
               </div>
             </div>
           }

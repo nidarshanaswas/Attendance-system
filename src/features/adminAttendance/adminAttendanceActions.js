@@ -31,6 +31,8 @@
   import { fetchDashboardTable } from "./adminAttendanceApi";
   import { createAsyncThunk } from "@reduxjs/toolkit";
   import { saveManualAttendanceApi } from "./adminAttendanceApi";
+  // import { fetchEmployeeEmailsApi } from "./adminAttendanceApi";
+  // import { fetchEmployeeDetailsApi } from "./adminAttendanceApi";
 
 
   export const fetchAdminAttendance = createAsyncThunk(
@@ -107,9 +109,7 @@ export const saveManualAttendance = createAsyncThunk(
   "attendance/manualEntry",
   async (attendanceData, { rejectWithValue }) => {
     try {
-      const res = await saveManualAttendanceApi(attendanceData);
-
-      return res;
+      return await saveManualAttendanceApi(attendanceData);
     } catch (err) {
       return rejectWithValue(err.message);
     }

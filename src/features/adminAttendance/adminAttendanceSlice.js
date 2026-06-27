@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAdminAttendance, fetchAttendanceList, fetchDashboardDataApi, fetchDashboardDataThunk, fetchDashboardTableApi } from "./adminAttendanceActions";
-import { fetchDashboardTable } from "./adminAttendanceApi";
 import { saveManualAttendance } from "./adminAttendanceActions";
+import { fetchDashboardTable } from "./adminAttendanceApi";
 
 const adminAttendanceSlice = createSlice({
   name: "myAttendance",
