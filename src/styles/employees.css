@@ -152,7 +152,7 @@
   border-radius: 8px;
 } */
 
-.emp-modal-overlay {
+.emp-modal-overlay-popup {
     position: fixed;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
@@ -162,26 +162,26 @@
     z-index: 1000;
 }
 
-.emp-modal-header {
+.emp-modal-header-popup {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.emp-modal {
+.emp-modal-popup {
     width: 450px;
     background: #fff;
     border-radius: 20px;
     padding: 30px;
 }
 
-.modal-title {
+.modal-title-popup {
     text-align: center;
     margin-bottom: 25px;
     color: #1e3a8a;
 }
 
-.form-group {
+.form-group-popup {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -189,7 +189,7 @@
     margin-bottom: 18px;
 }
 
-.icon-box {
+.icon-box-popup {
     width: 45px;
     height: 45px;
     background: #eef4ff;
@@ -203,9 +203,9 @@
     margin-top: 20px;
 }
 
-.form-group input,
-.form-group select,
-.password-wrapper input {
+.form-group-popup input,
+.form-group-popup select,
+.password-wrapper-popup input {
     width: 100%;
     height: 45px;
     border: 1px solid #d9d9d9;
@@ -215,13 +215,13 @@
     outline: none;
 }
 
-.form-group input:focus,
-.form-group select:focus,
-.password-wrapper input:focus {
+.form-group-popup input:focus,
+.form-group-popup select:focus,
+.password-wrapper-popup input:focus {
     border-color: #2563eb;
 }
 
-.password-wrapper {
+.password-wrapper-popup {
     width: 100%;
     position: relative;
 }
@@ -234,7 +234,7 @@
     color: gray;
 }
 
-.emp-modal-footer {
+.emp-modal-footer-popup {
     display: flex;
     justify-content: center;
     gap: 15px;
@@ -242,7 +242,7 @@
     flex-wrap: wrap;
 }
 
-.save-btn,
+.save-btn-popup,
 .cancel-btn-popup {
     width: 100px;
     height: 40px;
@@ -252,7 +252,7 @@
     font-size: 15px;
 }
 
-.save-btn {
+.save-btn-popup {
     background: #2563eb;
     color: white;
 }
@@ -261,21 +261,21 @@
     background: #e5e7eb;
 }
 
-.field-box {
+.field-box-popup {
     flex: 1;
     display: flex;
     flex-direction: column;
 }
 
-.field-box label {
+.field-box-popup label {
     font-size: 14px;
     font-weight: 600;
     color: #1f2937;
     margin-bottom: 6px;
 }
 
-.field-box input,
-.field-box select {
+.field-box-popup input,
+.field-box-popup select {
     width: 100%;
     height: 42px;
     border: 1px solid #d9d9d9;
@@ -285,8 +285,8 @@
     outline: none;
 }
 
-.field-box input:focus,
-.field-box select:focus {
+.field-box-popup input:focus,
+.field-box-popup select:focus {
     border-color: #2563eb;
 }
 
@@ -379,38 +379,38 @@
 
     /* Modal */
 
-    .emp-modal {
+    .emp-modal-popup {
         width: 95%;
         max-width: 420px;
         padding: 20px;
     }
 
-    .modal-title {
+    .modal-title-popup {
         font-size: 24px;
     }
 
-    .form-group {
+    .form-group-popup {
         gap: 10px;
         margin-bottom: 15px;
     }
 
-    .icon-box {
+    .icon-box-popup {
         width: 40px;
         height: 40px;
         font-size: 16px;
     }
 
-    .field-box label {
+    .field-box-popup label {
         font-size: 13px;
     }
 
-    .field-box input,
-    .field-box select {
+    .field-box-popup input,
+    .field-box-popup select {
         height: 40px;
         font-size: 13px;
     }
 
-    .save-btn,
+    .save-btn-popup,
     .cancel-btn-popup {
         width: 110px;
         height: 38px;
@@ -456,40 +456,40 @@
 
     /* Modal */
 
-    .emp-modal {
+    .emp-modal-popup {
         width: 96%;
         padding: 15px;
         border-radius: 15px;
     }
 
-    .modal-title {
+    .modal-title-popup {
         font-size: 20px;
         margin-bottom: 20px;
     }
 
-    .icon-box {
+    .icon-box-popup {
         width: 35px;
         height: 35px;
         font-size: 14px;
         border-radius: 10px;
     }
 
-    .field-box label {
+    .field-box-popup label {
         font-size: 12px;
     }
 
-    .field-box input,
-    .field-box select {
+    .field-box-popup input,
+    .field-box-popup select {
         height: 36px;
         font-size: 12px;
         padding: 0 10px;
     }
 
-    .emp-modal-footer {
+    .emp-modal-footer-popup {
         gap: 10px;
     }
 
-    .save-btn,
+    .save-btn-popup,
     .cancel-btn-popup {
         width: 90px;
         height: 35px;
@@ -499,27 +499,27 @@
 
 /* ================= FOLD DEVICES ================= */
 @media (max-width: 360px) {
-    .emp-modal {
+    .emp-modal-popup {
         padding: 12px;
     }
 
-    .modal-title {
+    .modal-title-popup {
         font-size: 18px;
     }
 
-    .icon-box {
+    .icon-box-popup {
         width: 30px;
         height: 30px;
         font-size: 12px;
     }
 
-    .field-box input,
-    .field-box select {
+    .field-box-popup input,
+    .field-box-popup select {
         height: 34px;
         font-size: 11px;
     }
 
-    .save-btn,
+    .save-btn-popup,
     .cancel-btn-popup {
         width: 80px;
         height: 32px;
@@ -529,13 +529,13 @@
 
 /* ================= NEST HUB ================= */
 @media (max-height: 700px) {
-    .emp-modal-overlay {
+    .emp-modal-overlay-popup {
         align-items: flex-start;
         overflow-y: auto;
         padding: 20px 0;
     }
 
-    .emp-modal {
+    .emp-modal-popup {
         margin: 20px auto;
     }
 }

@@ -182,25 +182,25 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                 size: 5,
                 name: "",
             })
-        );
+        );  
 
         onClose();
     };
     return (
-        <div className="emp-modal-overlay">
-            <div className="emp-modal">
+        <div className="emp-modal-overlay-popup">
+            <div className="emp-modal-popup">
 
-                <h2 className="modal-title">
+                <h2 className="modal-title-popup">
                     {employee ? "Edit Employee" : "Add Employee"}
                 </h2>
 
                 {/* Name */}
-                <div className="form-group">
-                    <div className="icon-box">
+                <div className="form-group-popup">
+                    <div className="icon-box-popup">
                         <FaUser />
                     </div>
 
-                    <div className="field-box">
+                    <div className="field-box-popup">
                         <label>Name</label>
                         <input
                             name="name"
@@ -212,12 +212,12 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                 </div>
 
                 {/* Email */}
-                <div className="form-group">
-                    <div className="icon-box">
+                <div className="form-group-popup">
+                    <div className="icon-box-popup">
                         <FaEnvelope />
                     </div>
 
-                    <div className="field-box">
+                    <div className="field-box-popup">
                         <label>Email</label>
                         <input
                             name="email"
@@ -230,12 +230,12 @@ function EmployeeModal({ employee, onClose, onSave, }) {
 
                 {/* Password */}
                 {!employee && (
-                    <div className="form-group">
-                        <div className="icon-box">
+                    <div className="form-group-popup">
+                        <div className="icon-box-popup">
                             <FaLock />
                         </div>
 
-                        <div className="field-box password-wrapper">
+                        <div className="field-box-popup password-wrapper-popup ">
                             <label>Password</label>
 
                             <input
@@ -257,12 +257,12 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                 )}
 
                 {/* Role */}
-                <div className="form-group">
-                    <div className="icon-box">
+                <div className="form-group-popup">
+                    <div className="icon-box-popup">
                         <FaUserShield />
                     </div>
 
-                    <div className="field-box">
+                    <div className="field-box-popup">
                         <label>Role</label>
 
                         <select
@@ -279,12 +279,12 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                 </div>
 
                 {/* Department */}
-                <div className="form-group">
-                    <div className="icon-box">
+                <div className="form-group-popup">
+                    <div className="icon-box-popup">
                         <FaBuilding />
                     </div>
 
-                    <div className="field-box">
+                    <div className="field-box-popup">
                         <label>Department</label>
 
                         <input
@@ -296,8 +296,8 @@ function EmployeeModal({ employee, onClose, onSave, }) {
                     </div>
                 </div>
 
-                <div className="emp-modal-footer">
-                    <button className="save-btn" onClick={handleSubmit}>
+                <div className="emp-modal-footer-popup">
+                    <button className="save-btn-popup" onClick={handleSubmit}>
                         {employee ? "Update" : "Save"}
                     </button>
 
