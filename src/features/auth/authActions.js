@@ -7,7 +7,7 @@ export const loginUser = createAsyncThunk(
     try {
       return await loginApi(payload);
     } catch (err) {
-      return rejectWithValue(err.message);
+      return rejectWithValue(err);
     }
   }
 );

@@ -11,6 +11,7 @@ import { showLoader, hideLoader } from "../../features/loader/loaderSlice";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../features/auth/authActions";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function LoginPage() {
     console.log(showLoader);
@@ -23,7 +24,43 @@ function LoginPage() {
     const [userName, setUserName] = useState("");
     const [passwordHash, setPasswordHash] = useState("");
 
-        const handleLogin = async () => {
+    // const handleLogin = async () => {
+    //     const payload = {
+    //         name: userName,
+    //         password: passwordHash,
+    //     };
+
+    //     dispatch(showLoader());
+
+    //     try {
+    //         const data = await dispatch(loginUser(payload));
+
+    //         if (data?.payload?.user) {
+    //             localStorage.setItem(
+    //                 "user",
+    //                 JSON.stringify(data.payload.user)
+    //             );
+
+    //             localStorage.setItem(
+    //                 "token",
+    //                 data.payload.token
+    //             );
+
+    //             setTimeout(() => {
+    //                 dispatch(hideLoader());
+    //                 navigate("/dashboard");
+    //             }, 100);
+    //         } else {
+    //             dispatch(hideLoader());
+    //             alert("Invalid Username or Password");
+    //         }
+    //     } catch (err) {
+    //         dispatch(hideLoader());
+    //         console.log(err);
+    //     }
+    // };
+
+    const handleLogin = async () => {
         const payload = {
             name: userName,
             password: passwordHash,
@@ -32,30 +69,40 @@ function LoginPage() {
         dispatch(showLoader());
 
         try {
-            const data = await dispatch(loginUser(payload));
+            const data = await dispatch(
+                loginUser(payload)
+            ).unwrap();
 
-            if (data?.payload?.user) {
-                localStorage.setItem(
-                    "user",
-                    JSON.stringify(data.payload.user)
-                );
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
 
-                localStorage.setItem(
-                    "token",
-                    data.payload.token
-                );
+            localStorage.setItem(
+                "token",
+                data.token
+            );
 
-                setTimeout(() => {
-                    dispatch(hideLoader());
-                    navigate("/dashboard");
-                }, 100);
-            } else {
-                dispatch(hideLoader());
-                alert("Invalid Username or Password");
-            }
-        } catch (err) {
+            toast.success("Login successful");
+
             dispatch(hideLoader());
-            console.log(err);
+
+            navigate("/dashboard");
+        } catch (error) {
+            dispatch(hideLoader());
+
+            console.log("Login Error:", error);
+
+            if (Array.isArray(error?.errors)) {
+                error.errors.forEach((msg) =>
+                    toast.error(msg)
+                );
+            } else {
+                toast.error(
+                    error?.message ||
+                    "Invalid Username or Password"
+                );
+            }
         }
     };
     return (
@@ -87,7 +134,7 @@ function LoginPage() {
                         placeholder="UserName"
                     />
                     <label>Password</label>
-                    
+
                     <div className="password-container">
                         <input
                             type={showPassword ? "text" : "password"}
