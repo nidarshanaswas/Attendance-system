@@ -1,15 +1,17 @@
 .manual-container {
   background: #f4f7fc;
-  padding: 50px;
+  padding: 30px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .manual-box {
     
   width: 470px;
-  height: 470px;
+  height: auto;
+  min-height:auto ;
   background: #fff;
   padding: 20px;
   border-radius: 12px;
@@ -35,7 +37,7 @@ label {
 }
 
 input, select, textarea {
-  height: 48px;
+  height: 36px;
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 0 12px;
