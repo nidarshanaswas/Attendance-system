@@ -6,6 +6,7 @@ import {
   fetchEmployeeEmailsApi,
   fetchEmployeeDetailsApi
 } from "../../features/adminAttendance/adminAttendanceApi";
+import { toast } from "react-toastify";
 
 function ManualEntryPage({ onClose }) {
 
@@ -91,9 +92,15 @@ const handleSelectEmail = async (id) => {
   );
 
   if (saveManualAttendance.fulfilled.match(result)) {
+    toast.success("Attendance added successfulyy");
     dispatch(fetchAttendanceList({ page: 1, size: 5 }));
 
-    onClose?.();
+    setTimeout(() => {
+ onClose?.();
+    }, 500);
+   
+  } else{
+    toast.error("Failed to add attendance")
   }
 };
 

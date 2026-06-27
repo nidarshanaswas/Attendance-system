@@ -41,6 +41,7 @@ function Attendance() {
  
   useEffect(() => {
     if(!userId) return;
+    console.log(filters);
 
     dispatch(
       fetchAttendanceList({
@@ -95,7 +96,7 @@ function Attendance() {
           <select 
           value={status}
           onChange={(e) => setStatus(e.target.value)}>
-            <option value="ALL">All</option>
+            <option value="All">All</option>
             <option value="PRESENT">Present</option>
             <option value="LEAVE">Leave</option>
             <option value="LATE">Late</option>
@@ -112,22 +113,24 @@ function Attendance() {
                 <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)}/>
         </div>
 
-        <button onClick={() => {
-          setPage(1);
-          setFilters({
-            // userId,
-            startDate: fromDate,
-            endDate: toDate,
-            status,
-            employeeName
-            // page: 1,
-            // size
-          });
-        }}>Apply</button>
+       <button
+  onClick={() => {
+    setPage(1);
+
+    setFilters({
+      startDate: fromDate,
+      endDate: toDate,
+      status,
+      employeeName,
+    });
+  }}
+>
+  Apply
+</button>
       </div>
 
       <div className="table-box">
-        <h3>All attendance</h3>
+        <h3>All Attendance</h3>
 
         <div className="table-scroll">
           <Table data={listData} columns={columns} />

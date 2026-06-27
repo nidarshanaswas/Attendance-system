@@ -134,7 +134,7 @@ function AdminAttendance() {
         </div>
 
         <div className="table-box">
-            <h3>My attendance</h3>
+            <h3>My Attendance</h3>
 
             <div className="table-scroll">
             <Table data={attendanceData} columns={columns}/>
