@@ -170,6 +170,7 @@ function EmployeeManager() {
 
                     <button
                         onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                        disabled={ page === totalPages}
                     >
                         Next
                     </button>
