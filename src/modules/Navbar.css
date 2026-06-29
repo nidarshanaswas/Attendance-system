@@ -197,7 +197,7 @@
 
         .navbar{
             height:60px;
-            width: 65%;
+            width: 100vw;
             padding:0 16px;
             display:grid;
             grid-template-columns: 40px 1fr auto;
