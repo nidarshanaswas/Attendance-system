@@ -106,123 +106,87 @@ function AdminAttendance() {
             <option value="LEAVE">Leave</option>
             <option value="LATE">Late</option>
           </select>
+          <div className="table-box">
+            <h3>My Attendance</h3>
+
+            <div className="table-scroll">
+              <Table data={attendanceData} columns={columns} />
+            </div>
+
+            <div className="pages">
+              <p>Page {currentPage} of {totalPages}</p>
+
+              <div className="pages-buttons">
+                <button
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  disabled={page === 1}
+                >
+                  Previous
+                </button>
+
+                <button
+                  onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+                >
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label>From</label>
+            <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
+          </div>
+
+          <div>
+            <label>To</label>
+            <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+          </div>
+
+
+          <button onClick={() => {
+            setPage(1);
+            dispatch(fetchAdminAttendance({
+              userId,
+              startDate: fromDate,
+              endDate: toDate,
+              status,
+              page: 1,
+              size
+            }))
+          }} >
+            Apply</button>
         </div>
 
-        <div>
-          <label>From</label>
-          <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
-        </div>
+        <div className="table-box">
+          <h3>My attendance</h3>
 
-        <div>
-          <label>To</label>
-          <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
-        </div>
+          <div className="table-scroll">
+            <Table data={attendanceData} columns={columns} />
+          </div>
 
+          <div className="pages">
+            <p>Page {currentPage} of {totalPages}</p>
 
-        <button onClick={() => {
-          setPage(1);
-          dispatch(fetchAdminAttendance({
-            userId,
-            startDate: fromDate,
-            endDate: toDate,
-            status,
-            page: 1,
-            size
-          }))
-        }} >
-          Apply</button>
-      </div>
+            <div className="pages-buttons">
+              <button
+                onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                disabled={page === 1}
+              >
+                Previous
+              </button>
 
-      <div className="table-box">
-        <h3>My attendance</h3>
-
-        <div className="table-scroll">
-          <Table data={attendanceData} columns={columns} />
-        </div>
-
-        <div className="pages">
-          <p>Page {currentPage} of {totalPages}</p>
-
-          <div className="pages-buttons">
-            <button
-              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-              disabled={page === 1}
-            >
-              Previous
-            </button>
-
-            <button
-              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            >
-              Next
-            </button>
+              <button
+                onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              >
+                Next
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+      </div>
+      );
 }
-export default AdminAttendance;
+      export default AdminAttendance;
 
-
-
-// import React, { useEffect, useMemo } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { fetchAdminAttendance } from "../../features/adminAttendance/adminAttendanceActions";
-// import { selectAttendance } from "../../features/adminAttendance/adminAttendanceSelectors";
-// import Table from "../../components/Table";
-
-// function AdminAttendance() {
-//   const dispatch = useDispatch();
-//   const attendanceRaw = useSelector(selectAttendance);
-
-//   // localStorage-ah oru thadava mattum parse pannu (memoize)
-//   const user = useMemo(() => {
-//     try {
-//       return JSON.parse(localStorage.getItem("user"));
-//     } catch {
-//       return null;
-//     }
-//   }, []);
-
-//   const userId = user?.id;   // primitive value
-
-//   useEffect(() => {
-//     if (!userId) return;
-//     dispatch(fetchAdminAttendance(userId));
-//   }, [userId, dispatch]);   // userId primitive, so loop illa
-
-//   const attendanceData = (attendanceRaw || []).map((item) => ({
-//     employee: userId,
-//     date: item.attendanceDate,
-//     clockIn: item.clockInTime || "-",
-//     clockOut: item.clockOutTime || "-",
-//     hours: `${Math.floor(item.totalMinutes / 60)}h ${item.totalMinutes % 60}m`,
-//     status: item.status,
-//   }));
-
-//   const columns = [
-//     { header: "Employee", key: "employee" },
-//     { header: "Date", key: "date" },
-//     { header: "In", key: "clockIn" },
-//     { header: "Out", key: "clockOut" },
-//     { header: "Hours", key: "hours" },
-//     {
-//       header: "Status",
-//       render: (item) => (
-//         <span className={item.status?.toLowerCase()}>{item.status}</span>
-//       ),
-//     },
-//   ];
-
-//   return (
-//     <div className="attendance-container">
-//       <h1>Check the attendance</h1>
-//       <div className="table-box">
-//         <Table data={attendanceData} columns={columns} />
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default AdminAttendance;

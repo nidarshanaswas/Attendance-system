@@ -6,6 +6,7 @@ import {
   fetchEmployeeEmailsApi,
   fetchEmployeeDetailsApi
 } from "../../features/adminAttendance/adminAttendanceApi";
+import { toast } from "react-toastify";
 
 function ManualEntryPage({ onClose }) {
 
@@ -14,19 +15,19 @@ function ManualEntryPage({ onClose }) {
   const [emails, setEmails] = useState([]);
   const [employee, setEmployee] = useState(null);
   const [loadingEmployee, setLoadingEmployee] = useState(false)
+  const [errors, setErrors] = useState({});
 
   const [formData, setFormData] = useState({
     employeeId: "",
     employeeName: "",
     email: "",
     date: "",
-    status: "Present",
+    status: "PRESENT",
     clockIn: "",
     clockOut: "",
     reason: ""
   });
 
-  // 🔥 LOAD EMAILS ON OPEN
   useEffect(() => {
     loadEmails();
   },[]);
@@ -41,7 +42,24 @@ function ManualEntryPage({ onClose }) {
   };
 
 const handleSelectEmail = async (id) => {
-  if (!id) return;
+  if (!id) {
+    setFormData((prev) => ({
+      ...prev,
+      employeeId: "",
+      employeeName: "",
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      employeeId: "Please select an Employee Email",
+    }));
+
+    return;
+  }
+  setErrors((prev) => ({
+    ...prev,
+    employeeId: "",
+  }));
 
   setLoadingEmployee(true);
 
@@ -75,10 +93,78 @@ const handleSelectEmail = async (id) => {
       ...prev,
       [name]: value,
     }));
+
+    setErrors((prev) => ({
+      ...prev, 
+      [name]: "",
+    }));
   };
 
+  const validateForm = () =>{
+    const newErrors = {};
+
+    if(!formData.employeeId){
+      newErrors.employeeId = "Please select Employee Email"
+    }
+    if(!formData.date){
+      newErrors.date = "Date is required"
+    }
+
+    if(!formData.status){
+      newErrors.status = "Status is required"
+    }
+    if(!formData.clockIn){
+      newErrors.clockIn = "Clock In time is required"
+    }
+    if(!formData.clockOut){
+      newErrors.clockOut = "Clock Out time is required"
+    }
+    if(formData.clockIn && formData.clockOut && formData.clockOut <= formData.clockIn){
+      newErrors.clockOut = "Clock Out must be greater than clock In"
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;  
+  }
+
+  const resetForm = () =>{
+    setFormData({
+      employeeId: "",
+      employeeName: "",
+      email: "",
+      date:"",
+      status: "PRESENT",
+      clockIn: "",
+      clockOut: "",
+      reason: "",
+    });
+    setErrors({});
+    setEmployee(null)
+  }
+  const handleCancel = () =>{
+    setFormData({
+      employeeId: "",
+      employeeName: "",
+      email: "",
+      date:"",
+      status: "PRESENT",
+      clockIn: "",
+      clockOut: "",
+      reason: "",
+    });
+
+    setErrors({});
+    setEmployee(null);
+
+    onClose?.();
+  };
+
+
   const handleSave = async () => {
-  const result = await dispatch(
+    if(!validateForm()) return;
+
+  try{
+    await dispatch(
     saveManualAttendance({
       employeeId: Number(formData.employeeId),
       clockInDate: formData.date,
@@ -88,23 +174,43 @@ const handleSelectEmail = async (id) => {
       status: formData.status,
       note: formData.reason || "Record By Manual",
     })
-  );
+  ).unwrap();
+      toast.success("Attendance added successfully");
 
-  if (saveManualAttendance.fulfilled.match(result)) {
-    dispatch(fetchAttendanceList({ page: 1, size: 5 }));
+      resetForm();
+      dispatch(fetchAttendanceList({ page: 1, size: 5}));
 
-    onClose?.();
-  }
-};
+      setTimeout(() => {
+        onClose?.()
+      }, 500);
 
+    } catch (error) {
+      console.log("Backend error", error);
+
+      if(Array.isArray(error?.errors)){
+        error.errors.forEach((msg) => toast.error(msg))
+      } else if(error?.errors) {
+        Object.values(error.errors).forEach((msg) => 
+          toast.err(msg)
+      );
+      } else if(
+        Array.isArray(error?.message)) {
+          error.message.forEach((msg) => 
+          toast.err(msg)
+        );
+        }
+        else{
+          toast.error(error?.message || "Something went wrong");
+        }
+    }
+  };
   return (
   <div className="manual-container">
     <div className="manual-box">
       <h2>Manual Attendance Entry</h2>
 
-      {/* Employee Email */}
       <div className="form-group">
-        <label>Select Emaill</label>
+        <label>Select Emaill <span className="required">*</span> </label>
 
         <select
           value={formData.employeeId}
@@ -118,9 +224,9 @@ const handleSelectEmail = async (id) => {
             </option>
           ))}
         </select>
+       <span className="error">{errors.employeeId || ""}</span>
       </div>
 
-      {/* Employee Name */}
       <div className="form-group">
         <label>Employee Name</label>
 
@@ -132,10 +238,9 @@ const handleSelectEmail = async (id) => {
         />
       </div>
 
-      {/* Date & Status */}
       <div className="row-group">
         <div className="form-group">
-          <label>Date</label>
+          <label>Date <span className="required">*</span></label>
 
           <input
             type="date"
@@ -143,10 +248,11 @@ const handleSelectEmail = async (id) => {
             value={formData.date}
             onChange={handleChange}
           />
+        <span className="error">{errors.date || ""}</span>
         </div>
 
         <div className="form-group">
-          <label>Status</label>
+          <label>Status <span className="required">*</span></label>
 
           <select
             name="status"
@@ -158,13 +264,15 @@ const handleSelectEmail = async (id) => {
             <option value="LEAVE">Leave</option>
             <option value="ABSENT">Absent</option>
           </select>
+
+          <span className="error">{errors.status || ""}</span>
+        
         </div>
       </div>
 
-      {/* Clock In & Clock Out */}
       <div className="row-group">
         <div className="form-group">
-          <label>Clock In</label>
+          <label>Clock In <span className="required">*</span></label>
 
           <input
             type="time"
@@ -172,10 +280,13 @@ const handleSelectEmail = async (id) => {
             value={formData.clockIn}
             onChange={handleChange}
           />
+
+          <span className="error">{errors.clockIn || ""}</span>
+        
         </div>
 
         <div className="form-group">
-          <label>Clock Out</label>
+          <label>Clock Out <span className="required">*</span></label>
 
           <input
             type="time"
@@ -183,10 +294,11 @@ const handleSelectEmail = async (id) => {
             value={formData.clockOut}
             onChange={handleChange}
           />
+
+          <span className="error">{errors.clockOut || ""}</span>
         </div>
       </div>
 
-      {/* Reason */}
       <div className="form-group">
         <label>Reason / Note</label>
 
@@ -196,14 +308,15 @@ const handleSelectEmail = async (id) => {
           onChange={handleChange}
           placeholder="Type the Note"
         />
+          <span className="error">{errors.reason || ""}</span>
+        
       </div>
 
-      {/* Buttons */}
       <div className="button-group">
         <button
           className="cancel-btn"
           type="button"
-          onClick={onClose}
+          onClick={handleCancel}
         >
           Cancel
         </button>

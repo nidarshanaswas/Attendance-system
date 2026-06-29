@@ -111,7 +111,11 @@ export const saveManualAttendance = createAsyncThunk(
     try {
       return await saveManualAttendanceApi(attendanceData);
     } catch (err) {
-      return rejectWithValue(err.message);
+      return rejectWithValue(
+        err.response?.data || {
+          message: err.message || "Something went wrong",
+        }
+      );
     }
   }
 );
