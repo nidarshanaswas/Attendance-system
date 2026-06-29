@@ -1,38 +1,38 @@
 .manual-container {
   background: #f4f7fc;
-  padding: 30px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: scroll;
+  overflow: hidden;
 }
 
 .manual-box {
-    
   width: 470px;
-  height: auto;
+  min-height: 700px;
   min-height:auto ;
   background: #fff;
-  padding: 20px;
+  padding: 18px;
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.05);
 }
 
 .manual-box h2 {
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-size: 18px;
   color: #1e293b;
 }
 
 .form-group {
+  position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 label {
-  font-size: 13px;
-  color: #64748b;
+  font-size: 14px;
+  color: black;
   margin-bottom: 6px;
 }
 
@@ -41,13 +41,14 @@ input, select, textarea {
   border: 1px solid #e2e8f0;
   border-radius: 8px;
   padding: 0 12px;
-  font-size: 14px;
+  font-size: 13 px;
   outline: none;
   font-family: "Inter", sans-serif;
+  color: #475363;
 }
 
 textarea {
-  height: 80px;
+  height: 40px;
   padding-top: 10px;
   resize: none;
 }
@@ -96,6 +97,20 @@ input:focus, select:focus, textarea:focus {
   border-radius: 8px;
   cursor: pointer;
 font-family: "Inter",sans-serif;
+}
+.error{
+  position: absolute;
+  left: 0;
+  top: calc(100% + 2px);
+  line-height: 1;
+  color: red;
+  font-size: 13.5px;
+  margin-top: 7px;
+}
+.required{
+  color: #ef4444;
+  margin-left: 2px;
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {

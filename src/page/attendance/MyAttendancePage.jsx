@@ -144,7 +144,8 @@ function Attendance() {
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1}>Previous</button>
             <button
-            onClick={() => setPage((prev) => Math.max(prev + 1, 1))}
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={ page === totalPages}
             >Next</button>
           </div>
         </div>
