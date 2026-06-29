@@ -1,12 +1,12 @@
-import React, { useMemo } from "react"; 
- import { useEffect, useState } from "react";
- import { useContext } from "react";
- import { useDispatch, useSelector } from "react-redux";
- import { fetchAdminAttendance } from "../../features/adminAttendance/adminAttendanceActions";
- import { selectAttendance, selectTotalPages, selectCurrentPage } from "../../features/adminAttendance/adminAttendanceSelectors";
+import React, { useMemo } from "react";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAdminAttendance } from "../../features/adminAttendance/adminAttendanceActions";
+import { selectAttendance, selectTotalPages, selectCurrentPage } from "../../features/adminAttendance/adminAttendanceSelectors";
 // import Card from "../../components/Card";
 import Table from "../../components/Table";
-import { apiPath } from "../../apiPath"; 
+import { apiPath } from "../../apiPath";
 
 function AdminAttendance() {
   const dispatch = useDispatch();
@@ -21,28 +21,28 @@ function AdminAttendance() {
   const [filters, setFilters] = useState({})
 
   const user = useMemo(() => {
-    try{
+    try {
       return JSON.parse(localStorage.getItem("user"))
     }
-    catch{
+    catch {
       return null;
     }
   }, []);
-  
+
   const userId = user?.id
- 
-  
+
+
   useEffect(() => {
     if (!userId) return;
 
-    dispatch(fetchAdminAttendance({ 
+    dispatch(fetchAdminAttendance({
       userId,
-    startDate : fromDate,
-    endDate: toDate,
-    status,
-    page,
-    size
-  }));
+      startDate: fromDate,
+      endDate: toDate,
+      status,
+      page,
+      size
+    }));
   }, [userId, fromDate, toDate, status, page, dispatch]);
 
   // const totalDays = attendanceRaw.length;
@@ -65,14 +65,14 @@ function AdminAttendance() {
 
   // const totalHours  = `${Math.floor(totalMinutes / 60)}h ${totalMinutes % 60}m`;
   const attendanceData = (attendanceRaw || []).map((item) => ({
-    
-  // employee: userId,
-  date: item.attendanceDate,
-  clockIn: item.clockInTime || "-",
-  clockOut: item.clockOutTime || "-",
-  hours: `${Math.floor(item.totalMinutes / 60)}h ${item.totalMinutes % 60}m`,
-  status: item.status
-}));
+
+    // employee: userId,
+    date: item.attendanceDate,
+    clockIn: item.clockInTime || "-",
+    clockOut: item.clockOutTime || "-",
+    hours: `${Math.floor(item.totalMinutes / 60)}h ${item.totalMinutes % 60}m`,
+    status: item.status
+  }));
 
   const columns = [
     // { header: "Employee", key: "employee" },
@@ -91,76 +91,76 @@ function AdminAttendance() {
   ];
 
   return (
-        <div className="attendance-container">
-        <div className="filter-box">
-            <div>
-{/* <label>Employee</label> */}
-{/* <input type="text" defaultValue="All employees"/> */}
-</div>
-
-<div>
-                <label>Status</label>
-                <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                    <option value="ALL">All</option>
-                    <option value="PRESENT">Present</option>
-                    <option value="LEAVE">Leave</option>
-                    <option value="LATE">Late</option>
-                </select>
-            </div>
-
-            <div>
-                <label>From</label>
-                <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)}/>
-            </div>
-
-            <div>
-                <label>To</label>
-                <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)}/>
-            </div>
-
-
-            <button onClick={() => {
-              setPage(1);
-              dispatch(fetchAdminAttendance({
-                userId,
-                startDate: fromDate,
-                endDate: toDate,
-                status,
-                page: 1,
-                size
-              }))
-            }} >
-              Apply</button>
+    <div className="attendance-container">
+      <div className="filter-box">
+        <div>
+          {/* <label>Employee</label> */}
+          {/* <input type="text" defaultValue="All employees"/> */}
         </div>
 
-        <div className="table-box">
-            <h3>My attendance</h3>
-
-            <div className="table-scroll">
-            <Table data={attendanceData} columns={columns}/>
-            </div>
-
-            <div className="pages">
-                <p>Page {currentPage} of {totalPages}</p>
-
-                <div className="pages-buttons">
-                    <button
-  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-  disabled={page === 1}
->
-  Previous
-</button>
-
-<button
-  onClick={() => setPage((prev) => Math.min( prev + 1, totalPages))}
->
-  Next
-</button>
-                </div>
-            </div>
+        <div>
+          <label>Status</label>
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <option value="ALL">All</option>
+            <option value="PRESENT">Present</option>
+            <option value="LEAVE">Leave</option>
+            <option value="LATE">Late</option>
+          </select>
         </div>
+
+        <div>
+          <label>From</label>
+          <input type="date" value={fromDate} onChange={(e) => setFromDate(e.target.value)} />
         </div>
-    );
+
+        <div>
+          <label>To</label>
+          <input type="date" value={toDate} onChange={(e) => setToDate(e.target.value)} />
+        </div>
+
+
+        <button onClick={() => {
+          setPage(1);
+          dispatch(fetchAdminAttendance({
+            userId,
+            startDate: fromDate,
+            endDate: toDate,
+            status,
+            page: 1,
+            size
+          }))
+        }} >
+          Apply</button>
+      </div>
+
+      <div className="table-box">
+        <h3>My attendance</h3>
+
+        <div className="table-scroll">
+          <Table data={attendanceData} columns={columns} />
+        </div>
+
+        <div className="pages">
+          <p>Page {currentPage} of {totalPages}</p>
+
+          <div className="pages-buttons">
+            <button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+
+            <button
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 export default AdminAttendance;
 

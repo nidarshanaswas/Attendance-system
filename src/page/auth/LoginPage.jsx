@@ -23,6 +23,7 @@ function LoginPage() {
 
     const [userName, setUserName] = useState("");
     const [passwordHash, setPasswordHash] = useState("");
+    const [errors, setErrors] = useState({ userName: "", passwordHash: "", });
 
     // const handleLogin = async () => {
     //     const payload = {
@@ -59,8 +60,34 @@ function LoginPage() {
     //         console.log(err);
     //     }
     // };
+    const validateForm = () => {
+        let newErrors = {};
 
+        // Username validation
+        if (!userName.trim()) {
+            newErrors.userName = "Username is required";
+        } else if (userName.trim().length < 3) {
+            newErrors.userName =
+                "Username must be at least 3 characters";
+        }
+
+        // Password validation
+        if (!passwordHash.trim()) {
+            newErrors.passwordHash =
+                "Password is required";
+        } else if (passwordHash.length < 8) {
+            newErrors.passwordHash =
+                "Password must be at least 8 characters";
+        }
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
     const handleLogin = async () => {
+        if (!validateForm()) {
+            return;
+        }
         const payload = {
             name: userName,
             password: passwordHash,
@@ -126,22 +153,34 @@ function LoginPage() {
                         </div>
 
                     </div>
-                    <label>User Name</label>
+                    <label>User Name  <span>*</span></label>
                     <input
                         type="userName"
                         value={userName}
-                        onChange={(e) => setUserName(e.target.value)}
+                        onChange={(e) => {
+                            setUserName(e.target.value);
+                            setErrors({ ...errors, userName: "", });
+                        }}
                         placeholder="UserName"
                     />
-                    <label>Password</label>
+                    {errors.userName && (
+                        <p className="error-message">
+                            {errors.userName}
+                        </p>
+                    )}
+                    <label>Password  <span>*</span></label>
 
                     <div className="password-container">
                         <input
                             type={showPassword ? "text" : "password"}
                             value={passwordHash}
-                            onChange={(e) => setPasswordHash(e.target.value)}
+                            onChange={(e) => {
+                                setPasswordHash(e.target.value);
+                                setErrors({ ...errors, passwordHash: "", });
+                            }}
                             placeholder="Password"
                         />
+
 
                         <span
                             className="eye-icon"
@@ -150,6 +189,11 @@ function LoginPage() {
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
                         </span>
                     </div>
+                    {errors.userName && (
+                        <p className="error-message">
+                            {errors.userName}
+                        </p>
+                    )}
                     <a href="/" className="forgot">
                         Forgot Password?
                     </a>
@@ -157,7 +201,7 @@ function LoginPage() {
                         className="signin-btn"
                         onClick={handleLogin}
                     >
-                        Sign In
+                        Login In
                     </button>
                     <div className="divider">
                         <span>Or continue with</span>

@@ -1,7 +1,10 @@
 .employee-page {
     padding: 25px;
+  
 }
-
+.emp-modal-popup{
+    height: 550px;
+}
 .employee-header {
     display: flex;
     justify-content: space-between;
@@ -30,8 +33,12 @@
     border-radius: 15px;
 }
 
-.employee-table {
+.table-wrapper-popup {
     width: 100%;
+}
+
+.employee-table {
+    /* width: 100%; */
     border-collapse: collapse;
 }
 
@@ -48,7 +55,7 @@
 
 .status-active {
     background: #cafcdb !important;
-    color: rgb(1, 110, 1) ;
+    color: rgb(1, 110, 1);
     font-weight: 500;
     padding: 6px 15px;
     border-radius: 20px;
@@ -76,7 +83,7 @@
     cursor: pointer;
 }
 
-.pagination {
+/* .pagination {
     margin-top: 25px;
     display: flex;
     justify-content: center;
@@ -84,9 +91,7 @@
 }
 
 .pagination span {
-    /* align-items: start; */
-    /* text-align: start; */
-    margin-right: 75%;
+    margin-right: 400px;
 }
 
 .pagination button {
@@ -95,12 +100,45 @@
     background: #2563eb;
     color: white;
     border-radius: 8px;
+} */
+
+.pages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
 }
+
+.pages p {
+    color: #64748B;
+    font-size: 14px;
+}
+
+.pages-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.pages-buttons button {
+    padding: 10px 16px;
+    border: 1px solid #E2E8F0;
+    background: white;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.pages-buttons button:hover {
+    background: #f8fafc;
+}
+
 /* --- Modal Core Cleanup --- */
 .emp-modal-overlay-popup {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.15); /* Soft premium backdrop tint */
+    background: rgba(15, 23, 42, 0.15);
+    /* Soft premium backdrop tint */
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
@@ -117,7 +155,8 @@
 }
 
 .modal-title-popup {
-    text-align: left; /* Changed from center to left */
+    text-align: left;
+    /* Changed from center to left */
     margin-bottom: 24px;
     font-size: 22px;
     font-weight: 700;
@@ -149,10 +188,15 @@
 .field-label-popup {
     font-size: 14px;
     font-weight: 500;
-    color: #71717a; /* Muted slate look for labels */
+    color: #71717a;
+    /* Muted slate look for labels */
     margin-bottom: 6px;
+    margin-top: 10px;
 }
-
+.field-label-popup span{
+    color: red;
+    margin-top: 5px;
+}
 .field-box-popup {
     position: relative;
     width: 100%;
@@ -210,10 +254,12 @@
 .emp-modal-footer-popup {
     grid-column: span 2;
     display: flex;
-    justify-content: flex-end; /* Moves buttons to bottom right like image 1 */
+    justify-content: flex-end;
+    /* Moves buttons to bottom right like image 1 */
     gap: 12px;
     margin-top: 16px;
 }
+
 .save-btn-popup,
 .cancel-btn-popup {
     height: 42px;
@@ -244,30 +290,55 @@
 .cancel-btn-popup:hover {
     background: #f4f4f5;
 }
-
+.error-message-popup {
+  color: #ef4444;
+  font-size: 13px;
+  margin-top: 2px;
+  font-weight: 500;
+  margin-bottom: -18px;
+}
 /* --- Responsive Adjustments --- */
 @media (max-width: 600px) {
     .emp-modal-popup {
         width: 90%;
         padding: 24px;
     }
+
     .emp-modal-form-grid {
         grid-template-columns: 1fr;
     }
+
     .form-group-popup.half-width {
         grid-column: span 2;
     }
+
     .emp-modal-footer-popup {
         grid-column: span 2;
         flex-direction: column-reverse;
     }
-    .save-btn-popup, .cancel-btn-popup {
+
+    .save-btn-popup,
+    .cancel-btn-popup {
         width: 100%;
     }
 }
+
 @media (max-width: 1024px) {
     .employee-page {
         padding: 18px;
+    }
+
+    .table-wrapper-popup {
+        /* width: 100%; */
+        overflow-x: auto;
+        overflow-y: hidden;
+        -webkit-overflow-scrolling: touch;
+        /* touch-action: pan-x; */
+    }
+
+    .employee-table {
+        min-width: 700px;
+        width: max-content;
     }
 
     .employee-search {
@@ -287,23 +358,53 @@
     .employee-header {
         flex-direction: row;
         gap: 15px;
+        width: 100vw;
     }
 
     .employee-search {
         width: 30%;
+        margin-left: 10px;
     }
 
     .add-btn {
-        width: 30%;
+        width: 40vw;
         /* padding: 12px; */
         /* align-items: center; */
         /* text-align: center; */
-        margin-right: 170px;
+        margin-right: 20px;
     }
 
-    .employee-table-container {
-        overflow-x: auto;
-        padding: 15px;
+    .pages {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        width: 100vw;
+    }
+
+    .pages p {
+        color: #64748B;
+        font-size: 14px;
+        margin-left: 20px;
+    }
+
+    .pages-buttons {
+        display: flex;
+        gap: 10px;
+        margin-right: 10px;
+    }
+
+    .table-wrapper-popup::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .table-wrapper-popup::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    .table-wrapper-popup::-webkit-scrollbar-thumb {
+        background: #2563eb;
+        border-radius: 20px;
     }
 
     .employee-table {
@@ -327,7 +428,7 @@
         margin-right: 0;
         text-align: center;
         margin-right: 400px;
-        
+
     }
 
     .pagination button {
